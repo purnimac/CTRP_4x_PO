@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.action.extension" value="action" />
+    <constant name="struts.devMode" value="${struts.devMode}" />
+    <constant name="struts.ui.theme" value="css_xhtml" />
+    <package name="default" extends="json-default">
+        <interceptors>
+
+            <interceptor name="showDisclaimer" class="com.fiveamsolutions.nci.commons.web.struts2.interceptor.ShowSplashPageInterceptor">
+                <param name="splashPageActionName">disclaimerAction</param>
+                <param name="sessionFlagName">disclaimerAccepted</param>
+            </interceptor>
+
+            <interceptor name="nullCollectionElements"
+                class="com.fiveamsolutions.nci.commons.web.struts2.interceptor.NullCollectionElementInterceptor" />
+
+            <interceptor name="parameterTrim"
+                class="com.fiveamsolutions.nci.commons.web.struts2.interceptor.ParameterTrimInterceptor" />
+
+            <interceptor name="maliciousInput"
+                class="com.fiveamsolutions.nci.commons.web.struts2.interceptor.XSSFilterInterceptor" />
+
+            <interceptor-stack name="poDefaultStack">
+                <interceptor-ref name="showDisclaimer"/>
+                <interceptor-ref name="logger"/>
+                <interceptor-ref name="exception">
+                  <param name="logEnabled">true</param>
+                  <param name="logCategory">gov.nih.nci.po</param>
+                  <param name="logLevel">ERROR</param>                               
+                </interceptor-ref>
+                <interceptor-ref name="alias" />
+                <interceptor-ref name="checkbox" />
+                <interceptor-ref name="params">
+                    <!--
+                        Excludes the jQuery no-cache _ parameter and the Displaytag d-#-X parameter(s)
+                    -->
+                    <param name="excludeParams">
+                        _,d-\d+?-[sop],^struts\..*,^\d\d.*,^role.fundingMechanismSelect
+                    </param>
+                </interceptor-ref>
+                <interceptor-ref name="servletConfig" />
+                <interceptor-ref name="prepare" />
+                <interceptor-ref name="i18n" />
+                <interceptor-ref name="chain" />
+                <interceptor-ref name="fileUpload" />
+                <interceptor-ref name="staticParams" />
+                <interceptor-ref name="params">
+                    <!--
+                        Excludes the jQuery no-cache _ parameter and the Displaytag d-#-X parameter(s)
+                    -->
+                    <param name="excludeParams">
+                        _,d-\d+?-[sop],^struts\..*,^\d\d.*,^role.fundingMechanismSelect
+                    </param>
+                </interceptor-ref>
+                <interceptor-ref name="conversionError" />
+                <interceptor-ref name="nullCollectionElements" />
+                <interceptor-ref name="parameterTrim">
+                    <param name="trimToNull">true</param>
+                    <param name="trimFromFront">true</param>
+                </interceptor-ref>
+                <interceptor-ref name="maliciousInput" />
+                <interceptor-ref name="validation">
+                    <param name="excludeMethods">input,back,cancel</param>
+                </interceptor-ref>
+                <interceptor-ref name="workflow">
+                    <param name="excludeMethods">input,back,cancel</param>
+                </interceptor-ref>                
+                <interceptor-ref name="tokenSession">
+                    <param name="includeMethods">add,edit</param>
+                </interceptor-ref>
+           </interceptor-stack>
+
+            <interceptor-stack name="poNoDisclaimerStack">
+                <interceptor-ref name="logger"/>
+                <interceptor-ref name="exception">
+                  <param name="logEnabled">true</param>
+                  <param name="logCategory">gov.nih.nci.po</param>
+                  <param name="logLevel">ERROR</param>                               
+                </interceptor-ref>
+                <interceptor-ref name="alias" />
+                <interceptor-ref name="checkbox" />
+                <interceptor-ref name="params">
+                    <!--
+                        Excludes the jQuery no-cache _ parameter and the Displaytag d-#-X parameter(s)
+                    -->
+                    <param name="excludeParams">
+                        _,d-\d+?-[sop],^struts\..*,^\d\d.*,^role.fundingMechanismSelect
+                    </param>
+                </interceptor-ref>
+                <interceptor-ref name="servletConfig" />
+                <interceptor-ref name="prepare" />
+                <interceptor-ref name="i18n" />
+                <interceptor-ref name="chain" />
+                <interceptor-ref name="fileUpload" />
+                <interceptor-ref name="staticParams" />
+                <interceptor-ref name="params">
+                    <!--
+                        Excludes the jQuery no-cache _ parameter and the Displaytag d-#-X parameter(s)
+                    -->
+                    <param name="excludeParams">
+                        _,d-\d+?-[sop],^struts\..*,^\d\d.*,^role.fundingMechanismSelect
+                    </param>
+                </interceptor-ref>
+                <interceptor-ref name="conversionError" />
+                <interceptor-ref name="nullCollectionElements" />
+                <interceptor-ref name="parameterTrim">
+                    <param name="trimToNull">true</param>
+                    <param name="trimFromFront">true</param>
+                </interceptor-ref>
+                <interceptor-ref name="maliciousInput" />
+                <interceptor-ref name="validation">
+                    <param name="excludeMethods">input,back,cancel</param>
+                </interceptor-ref>
+                <interceptor-ref name="workflow">
+                    <param name="excludeMethods">input,back,cancel</param>
+                </interceptor-ref>
+                <interceptor-ref name="tokenSession">
+                    <param name="includeMethods">accept</param>
+                </interceptor-ref>
+           </interceptor-stack>
+
+           <interceptor-stack name="poPerMethodValidationStack">
+                <interceptor-ref name="showDisclaimer"/>
+                <interceptor-ref name="logger"/>
+                <interceptor-ref name="exception">
+                  <param name="logEnabled">true</param>
+                  <param name="logCategory">gov.nih.nci.po</param>
+                  <param name="logLevel">ERROR</param>                               
+                </interceptor-ref>
+                <interceptor-ref name="alias" />
+                <interceptor-ref name="checkbox" />
+                <interceptor-ref name="params">
+                    <!--
+                        Excludes the jQuery no-cache _ parameter and the Displaytag d-#-X parameter(s)
+                    -->
+                    <param name="excludeParams">
+                        _,d-\d+?-[sop],^struts\..*,^\d\d.*,^role.fundingMechanismSelect
+                    </param>
+                </interceptor-ref>
+                <interceptor-ref name="servletConfig" />
+                <interceptor-ref name="prepare" />
+                <interceptor-ref name="i18n" />
+                <interceptor-ref name="chain" />
+                <interceptor-ref name="fileUpload" />
+                <interceptor-ref name="staticParams" />
+                <interceptor-ref name="params">
+                    <!--
+                        Excludes the jQuery no-cache _ parameter and the Displaytag d-#-X parameter(s)
+                    -->
+                    <param name="excludeParams">
+                        _,d-\d+?-[sop],^struts\..*,^\d\d.*,^role.fundingMechanismSelect
+                    </param>
+                </interceptor-ref>
+                <interceptor-ref name="conversionError" />
+                <interceptor-ref name="nullCollectionElements" />
+                <interceptor-ref name="parameterTrim">
+                    <param name="trimToNull">true</param>
+                    <param name="trimFromFront">true</param>
+                </interceptor-ref>
+                <interceptor-ref name="maliciousInput" />
+                <interceptor-ref name="validation">
+                    <param name="excludeMethods">input,back,cancel</param>
+                    <param name="validateAnnotatedMethodOnly">true</param>
+                </interceptor-ref>
+                <interceptor-ref name="jsonValidation"/>
+                <interceptor-ref name="workflow">
+                    <param name="excludeMethods">input,back,cancel</param>
+                </interceptor-ref>
+           </interceptor-stack>
+
+           <interceptor-stack name="poSearchPerMethodValidationStack">
+                <interceptor-ref name="showDisclaimer"/>
+                <interceptor-ref name="logger"/>
+                <interceptor-ref name="exception">
+                  <param name="logEnabled">true</param>
+                  <param name="logCategory">gov.nih.nci.po</param>
+                  <param name="logLevel">ERROR</param>                               
+                </interceptor-ref>
+                <interceptor-ref name="alias" />
+                <interceptor-ref name="checkbox" />
+                <interceptor-ref name="params">
+                    <!--
+                Excludes the jQuery no-cache _ parameter and the Displaytag d-#-X parameter(s)
+                -->
+                    <param name="excludeParams">
+                        _,d-\d+?-[sop],^struts\..*,^\d\d.*,^role.fundingMechanismSelect
+                    </param>
+                </interceptor-ref>
+                <interceptor-ref name="servletConfig" />
+                <interceptor-ref name="prepare" />
+                <interceptor-ref name="i18n" />
+                <interceptor-ref name="chain" />
+                <interceptor-ref name="fileUpload" />
+                <interceptor-ref name="staticParams" />
+                <interceptor-ref name="params">
+                    <!--
+                Excludes the jQuery no-cache _ parameter and the Displaytag d-#-X parameter(s)
+                -->
+                    <param name="excludeParams">
+                        _,d-\d+?-[sop],^struts\..*,^\d\d.*,^role.fundingMechanismSelect
+                    </param>
+                </interceptor-ref>
+                <interceptor-ref name="conversionError" />
+                <interceptor-ref name="nullCollectionElements" />
+                <interceptor-ref name="parameterTrim">
+                    <param name="trimToNull">true</param>
+                </interceptor-ref>
+                <interceptor-ref name="maliciousInput" />
+                <interceptor-ref name="validation">
+                    <param name="excludeMethods">input,back,cancel</param>
+                    <param name="validateAnnotatedMethodOnly">true</param>
+                </interceptor-ref>
+                <interceptor-ref name="workflow">
+                <param name="excludeMethods">input,back,cancel</param>
+                </interceptor-ref>
+                <interceptor-ref name="tokenSession">
+                    <param name="includeMethods">search</param>
+                </interceptor-ref>
+            </interceptor-stack>
+            <!-- END : Special interceptors designed to NOT trim leading whitespace -->
+        </interceptors>
+
+        <default-interceptor-ref name="poDefaultStack" />
+
+        <global-results>
+            <result name="error">/error.jsp</result>
+            <result name="notYetImplemented">/notYetImplemented.jsp</result>
+            <result name="disclaimerAction">/protected/disclaimerAction.action</result>
+            <result name="invalid.token">/inValidToken.jsp</result>
+        </global-results>
+
+        <global-exception-mappings>
+            <exception-mapping result="error" exception="java.lang.Throwable" />
+        </global-exception-mappings>
+
+        <action name="login/login">
+            <interceptor-ref name="poNoDisclaimerStack"/>
+            <result>/WEB-INF/jsp/login/login.jsp</result>
+        </action>
+        <action name="login/loginFailed">
+            <interceptor-ref name="poNoDisclaimerStack"/>
+            <result>/WEB-INF/jsp/login/loginFailed.jsp</result>
+        </action>
+
+        <action name="login/logout" class="com.fiveamsolutions.nci.commons.web.struts2.action.LogoutAction" method="logout">
+            <interceptor-ref name="poNoDisclaimerStack"/>
+            <result name="success" type="redirectAction">
+                <param name="namespace">/protected</param>
+                <param name="actionName">home</param>
+            </result>
+        </action>
+        <action name="systemStatusDump" class="gov.nih.nci.coppa.web.ComprehensiveApplicationStatusLogger">
+            <interceptor-ref name="poNoDisclaimerStack"/>  
+            <result name="success" type="redirectAction">
+                <param name="namespace">/protected</param>
+                <param name="actionName">home</param>
+            </result>          
+        </action>
+    </package>
+
+    <package name="common" extends="default" abstract="true">
+        <action name="**contactable/email/*" class="gov.nih.nci.po.web.contactable.AbstractEditContactListAction$EmailAction" method="{2}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="input">/WEB-INF/jsp/contactable/email.jsp</result>
+            <result name="success">/WEB-INF/jsp/contactable/email.jsp</result>
+        </action>
+        <action name="**contactable/phone/*" class="gov.nih.nci.po.web.contactable.AbstractEditContactListAction$PhoneAction" method="{2}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="input">/WEB-INF/jsp/contactable/phone.jsp</result>
+            <result name="success">/WEB-INF/jsp/contactable/phone.jsp</result>
+        </action>
+        <action name="**contactable/fax/*" class="gov.nih.nci.po.web.contactable.AbstractEditContactListAction$FaxAction" method="{2}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="input">/WEB-INF/jsp/contactable/fax.jsp</result>
+            <result name="success">/WEB-INF/jsp/contactable/fax.jsp</result>
+        </action>
+        <action name="**contactable/tty/*" class="gov.nih.nci.po.web.contactable.AbstractEditContactListAction$TtyAction" method="{2}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="input">/WEB-INF/jsp/contactable/tty.jsp</result>
+            <result name="success">/WEB-INF/jsp/contactable/tty.jsp</result>
+        </action>
+        <action name="**contactable/url/*" class="gov.nih.nci.po.web.contactable.AbstractEditContactListAction$UrlAction" method="{2}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="input">/WEB-INF/jsp/contactable/url.jsp</result>
+            <result name="success" >/WEB-INF/jsp/contactable/url.jsp</result>
+        </action>
+        
+        <action name="**alias/*" class="gov.nih.nci.po.web.alias.EditAliasListAction" method="{2}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="input">/WEB-INF/jsp/alias/alias.jsp</result>
+            <result name="success">/WEB-INF/jsp/alias/alias.jsp</result>
+        </action>
+
+        <action name="**mailable/*" class="gov.nih.nci.po.web.mailable.ManageMailableAction" method="{2}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="input">/WEB-INF/jsp/mailable/address.jsp</result>
+            <result name="success">/WEB-INF/jsp/mailable/addresses.jsp</result>
+        </action>
+        <action name="**popup/address/*" class="gov.nih.nci.po.web.mailable.ManageMailableAction" method="{2}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="input">/WEB-INF/jsp/mailable/address.jsp</result>
+            <result name="success">/WEB-INF/jsp/mailable/addresses.jsp</result>
+        </action>       
+    </package>
+    
+    <package name="security" namespace="/security" extends="common">        
+         <action name="manage/groups/*" class="gov.nih.nci.po.web.security.ManageUserGroupsAction" method="{1}">
+            <interceptor-ref name="poDefaultStack" />            
+            <result name="input">/WEB-INF/jsp/security/managerGroups.jsp</result>
+            <result name="success">/WEB-INF/jsp/security/managerGroups.jsp</result>
+        </action>
+    </package>
+    
+
+    <package name="protected" namespace="/protected" extends="common">
+        <action name="home">
+            <result>/WEB-INF/jsp/home.jsp</result>
+        </action>
+
+        <action name="disclaimerAction*" class="gov.nih.nci.po.web.DisclaimerAction" method="{1}">
+            <interceptor-ref name="poNoDisclaimerStack"/>
+            <result>/WEB-INF/jsp/login/disclaimer.jsp</result>
+            <result name="acceptView" type="redirectAction">home.action</result>
+        </action>
+        
+        <!-- Organization -> Inbox && Person -> Inbox -->
+        <action name="curate/search/*" class="gov.nih.nci.po.web.curation.CurateAction" method="{1}">
+            <result name="success">/WEB-INF/jsp/curate/{1}.jsp</result>            
+            <result name="list" type="redirectAction">listAll</result>
+        </action>
+        <action name="ajax/curate/search/*/*" class="gov.nih.nci.po.web.curation.CurateAction" method="{2}">
+            <result name="success">/WEB-INF/jsp/curate/{1}/list.jsp</result>
+            <result name="list" type="redirectAction">listAll</result>
+            <result name="exportOrgs">/WEB-INF/jsp/curate/organization/listTable.jsp</result>
+            <result name="exportPersons">/WEB-INF/jsp/curate/person/listTable.jsp</result>
+        </action>
+        
+        <!-- Family -> List/Search -->
+        <action name="search/family/*" class="gov.nih.nci.po.web.search.SearchFamilyAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/search/family/list.jsp</result>
+        </action>
+        <action name="ajax/search/family/*" class="gov.nih.nci.po.web.search.SearchFamilyAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/search/family/search.jsp</result>
+        </action>
+        <action name="ajax/search/family/results/*" class="gov.nih.nci.po.web.search.SearchFamilyAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/search/family/results.jsp</result>
+        </action>
+        
+        <!-- Family -> Edit/Create -->
+        <action name="family/curate/*" class="gov.nih.nci.po.web.curation.CurateFamilyAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <interceptor-ref name="tokenSession">
+                <param name="includeMethods">submit</param>
+            </interceptor-ref>
+            <result name="success">/WEB-INF/jsp/curate/family/family.jsp</result>
+            <result name="input">/WEB-INF/jsp/curate/family/family.jsp</result>
+            <result name="list" type="redirectAction">search/family/list.action</result>
+        </action>
+        <action name="family/create/*" class="gov.nih.nci.po.web.create.CreateFamilyAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <interceptor-ref name="tokenSession">
+                <param name="includeMethods">save</param>
+            </interceptor-ref>
+            <result name="success" type="redirectAction">family/curate/start?family.id=${familyId}</result>
+            <result name="input">/WEB-INF/jsp/curate/family/family.jsp</result>
+        </action>
+        <action name="ajax/search/family/organization/results/list" class="gov.nih.nci.po.web.curation.CurateFamilyAction" method="start">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="input">/WEB-INF/jsp/curate/family/familyOrganizationList.jsp</result>
+        </action>
+        
+        <!-- Family Organization Relationship (Family Perspective) -> Create/Edit -->
+        <action name="family/organization/relationship/curate/*" class="gov.nih.nci.po.web.curation.CurateFamilyOrganizationRelationshipAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <interceptor-ref name="tokenSession">
+                <param name="includeMethods">submit</param>
+            </interceptor-ref>
+            <result name="success">/WEB-INF/jsp/curate/family/familyOrganizationRelationship.jsp</result>
+            <result name="input">/WEB-INF/jsp/curate/family/familyOrganizationRelationship.jsp</result>
+            <result name="parent" type="redirectAction">family/curate/start?family.id=${familyOrgRelationship.family.id}</result>
+        </action>
+        <action name="family/organization/relationship/create/*" class="gov.nih.nci.po.web.create.CreateFamilyOrganizationRelationshipAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <interceptor-ref name="tokenSession">
+                <param name="includeMethods">create</param>
+            </interceptor-ref>
+            <result name="success" type="redirectAction">family/organization/relationship/curate/start?familyOrgRelationship.id=${familyOrgRelationshipId}</result>
+            <result name="input">/WEB-INF/jsp/curate/family/familyOrganizationRelationship.jsp</result>
+        </action>
+        <action name="ajax/family/organization/relationship/*" class="gov.nih.nci.po.web.curation.CurateFamilyOrganizationRelationshipAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <result name="orgInfo">/WEB-INF/jsp/curate/family/familyOrgRelationshipOrgInfo.jsp</result>
+            <result name="relationships">/WEB-INF/jsp/curate/family/organizationRelationshipList.jsp</result>
+        </action>
+        
+        <!-- Family Organization Relationship (Organization Perspective) -> Create/Edit -->
+        <action name="organization/family/relationship/curate/*" class="gov.nih.nci.po.web.curation.CurateFamilyOrganizationRelationshipAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <interceptor-ref name="tokenSession">
+                <param name="includeMethods">submit</param>
+            </interceptor-ref>
+            <result name="success">/WEB-INF/jsp/curate/family/familyOrganizationRelationshipOrgPerspective.jsp</result>
+            <result name="input">/WEB-INF/jsp/curate/family/familyOrganizationRelationshipOrgPerspective.jsp</result>
+            <result name="parent" type="redirectAction">roles/organizational/familyRelationships/start?organization=${familyOrgRelationship.organization.id}</result>
+        </action>
+        <action name="organization/family/relationship/create/*" class="gov.nih.nci.po.web.create.CreateFamilyOrganizationRelationshipAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <interceptor-ref name="tokenSession">
+                <param name="includeMethods">create</param>
+            </interceptor-ref>
+            <result name="success" type="redirectAction">organization/family/relationship/curate/start?familyOrgRelationship.id=${familyOrgRelationshipId}</result>
+            <result name="input">/WEB-INF/jsp/curate/family/familyOrganizationRelationshipOrgPerspective.jsp</result>
+        </action>
+        <action name="ajax/organization/family/relationship/*" class="gov.nih.nci.po.web.curation.CurateFamilyOrganizationRelationshipAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <result name="familyInfo">/WEB-INF/jsp/curate/family/familyOrgRelationshipFamilyInfo.jsp</result>
+            <result name="relationships">/WEB-INF/jsp/curate/family/organizationRelationshipList.jsp</result>
+        </action>
+        
+        <!--  Organization Relationship Edit -->
+        <action name="popup/organization/relationship/curate/*" class="gov.nih.nci.po.web.curation.CurateOrganizationRelationshipAction" method="{1}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <interceptor-ref name="tokenSession">
+                <param name="includeMethods">update</param>
+            </interceptor-ref>
+            <result name="input">/WEB-INF/jsp/curate/family/changeOrganizationRelationship.jsp</result>
+            <result name="success">/WEB-INF/jsp/curate/family/changeOrganizationRelationship.jsp</result>
+        </action>
+        
+        <action name="popup/organization/relationship/create/*" class="gov.nih.nci.po.web.create.CreateOrganizationRelationshipAction" method="{1}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <interceptor-ref name="tokenSession">
+                <param name="includeMethods">create</param>
+            </interceptor-ref>
+            <result name="input">/WEB-INF/jsp/curate/family/changeOrganizationRelationship.jsp</result>
+            <result name="success">/WEB-INF/jsp/curate/family/changeOrganizationRelationship.jsp</result>
+        </action>
+
+        <!-- Organization.FamilyRelationships - List -->
+        <action name="roles/organizational/familyRelationships/*" class="gov.nih.nci.po.web.roles.OrganizationPerspectiveFamilyRelationshipsAction" method="{1}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/roles/organizational/FamilyRelationships/manage.jsp</result>
+        </action>
+        
+        <!-- Organization -> Edit/Curate -->
+        <action name="organization/curate/curate/error" class="gov.nih.nci.po.web.curation.CurateEntityValidationAction" method="execute">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/curate/organization/curateError.jsp</result>
+        </action>
+        <action name="organization/curate/*" class="gov.nih.nci.po.web.curation.CurateOrganizationAction" method="{1}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <interceptor-ref name="tokenSession">
+                <param name="includeMethods">curate</param>
+            </interceptor-ref>
+            <exception-mapping result="curate" exception="gov.nih.nci.po.service.InvalidStructuralRoleException"/>
+            <exception-mapping result="curateError" exception="gov.nih.nci.po.service.CurateEntityValidationException"/>
+            <result name="curate">/WEB-INF/jsp/curate/organization/curate.jsp</result>
+            <result name="curateError" type="redirectAction">organization/curate/curate/error?organization.id=${organizationId}&amp;duplicateOf.id=${duplicateOfId}</result>
+            <result name="input">/WEB-INF/jsp/curate/organization/{1}.jsp</result>
+            <result name="success" type="redirectAction">organization/curate/start?organization.id=${organizationId}</result>
+        </action>
+        <action name="ajax/organization/curate/*" class="gov.nih.nci.po.web.curation.CurateOrganizationAction" method="{1}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="changeCurrentChangeRequest">/WEB-INF/jsp/curate/organization/crInfo.jsp</result>
+        </action>
+
+        <!-- Person -> Edit/Curate -->
+        <action name="person/curate/*" class="gov.nih.nci.po.web.curation.CuratePersonAction" method="{1}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <interceptor-ref name="tokenSession">
+                <param name="includeMethods">curate</param>
+            </interceptor-ref>
+            <result name="curate">/WEB-INF/jsp/curate/person/curate.jsp</result>
+            <result name="input">/WEB-INF/jsp/curate/person/{1}.jsp</result>
+            <result name="success" type="redirectAction">person/curate/start?person.id=${personId}</result>            
+        </action>
+        <action name="ajax/person/curate/*" class="gov.nih.nci.po.web.curation.CuratePersonAction" method="{1}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="changeCurrentChangeRequest">/WEB-INF/jsp/curate/person/crInfo.jsp</result>
+        </action>
+
+        <!-- Family -> Search -> Popup Select -->
+        <action name="selector/family/*" class="gov.nih.nci.po.web.search.SearchFamilyAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/selector/family/list.jsp</result>
+            <result name="input">/WEB-INF/jsp/selector/family/list.jsp</result>
+        </action>
+        <action name="ajax/selector/family/*" class="gov.nih.nci.po.web.search.SearchFamilyAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/selector/family/list.jsp</result>
+        </action>
+        <action name="ajax/selector/family/results/*" class="gov.nih.nci.po.web.search.SearchFamilyAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/selector/family/list.jsp</result>
+        </action>
+
+        <!-- Organization -> Search -> Popup Select -->
+        <action name="selector/organization/*" class="gov.nih.nci.po.web.selector.SelectOrganizationAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/selector/organization/search.jsp</result>
+            <result name="input">/WEB-INF/jsp/selector/organization/search.jsp</result>
+        </action>
+        <action name="ajax/selector/organization/*" class="gov.nih.nci.po.web.selector.SelectOrganizationAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/selector/organization/search.jsp</result>
+            <result name="detail">/WEB-INF/jsp/selector/organization/detail.jsp</result>
+        </action>
+        <action name="ajax/selector/organization/results/*" class="gov.nih.nci.po.web.selector.SelectOrganizationAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/selector/organization/results.jsp</result>
+        </action>
+
+        <!-- Person -> Search -> Popup Select -->
+        <action name="selector/person/*" class="gov.nih.nci.po.web.selector.SelectPersonAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/selector/person/search.jsp</result>
+            <result name="input">/WEB-INF/jsp/selector/person/search.jsp</result>
+        </action>
+        <action name="ajax/selector/person/*" class="gov.nih.nci.po.web.selector.SelectPersonAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/selector/person/search.jsp</result>
+            <result name="detail">/WEB-INF/jsp/selector/person/detail.jsp</result>
+        </action>
+        <action name="ajax/selector/person/results/*" class="gov.nih.nci.po.web.selector.SelectPersonAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/selector/person/results.jsp</result>
+        </action>
+
+        <!-- Organization -> Search -->
+        <action name="search/organization/*" class="gov.nih.nci.po.web.search.SearchOrganizationAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/search/organization/search.jsp</result>
+            <result name="input">/WEB-INF/jsp/search/organization/search.jsp</result>
+        </action>
+        <action name="ajax/search/organization/*" class="gov.nih.nci.po.web.search.SearchOrganizationAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/search/organization/search.jsp</result>
+        </action>
+        <action name="ajax/search/organization/results/*" class="gov.nih.nci.po.web.search.SearchOrganizationAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/search/organization/results.jsp</result>
+            <result name="export">/WEB-INF/jsp/search/organization/resultsTable.jsp</result>
+        </action>
+
+        <!-- Person -> Search -->
+        <action name="search/person/*" class="gov.nih.nci.po.web.search.SearchPersonAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/search/person/search.jsp</result>
+            <result name="input">/WEB-INF/jsp/search/person/search.jsp</result>
+        </action>
+        <action name="ajax/search/person/*" class="gov.nih.nci.po.web.search.SearchPersonAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/search/person/search.jsp</result>
+        </action>
+        <action name="ajax/search/person/results/*" class="gov.nih.nci.po.web.search.SearchPersonAction" method="{1}">
+            <interceptor-ref name="poSearchPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/search/person/results.jsp</result>
+            <result name="export">/WEB-INF/jsp/search/person/resultsTable.jsp</result>
+        </action>
+
+        <!-- Organization -> Create -->
+        <action name="create/organization/*" class="gov.nih.nci.po.web.create.CreateOrganizationAction" method="{1}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <interceptor-ref name="tokenSession">
+                <param name="includeMethods">create</param>
+            </interceptor-ref>
+            <result name="input">/WEB-INF/jsp/curate/organization/curate.jsp</result>
+            <result name="success" type="redirectAction">organization/curate/start?organization.id=${organizationId}</result>
+        </action>
+
+        <!-- Person -> Create -->
+        <action name="create/person/*" class="gov.nih.nci.po.web.create.CreatePersonAction" method="{1}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <interceptor-ref name="tokenSession">
+                <param name="includeMethods">create</param>
+            </interceptor-ref>
+            <result name="input">/WEB-INF/jsp/curate/person/curate.jsp</result>
+            <result name="success" type="redirectAction">person/curate/start?person.id=${personId}</result>
+        </action>
+
+        <!-- Person/Organization -> Edit/Curate -> Assign Organizational Contact Role (can be done from either the P or O side
+-->
+        <action name="roles/*/OrganizationalContact/*" class="gov.nih.nci.po.web.roles.OrganizationalContactAction" method="{2}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="input">/WEB-INF/jsp/roles/OrganizationalContact/form.jsp</result>
+            <result name="success">/WEB-INF/jsp/roles/OrganizationalContact/manage.jsp</result>
+        </action>
+        <action name="ajax/roles/*/OrganizationalContact/*" class="gov.nih.nci.po.web.roles.OrganizationalContactAction" method="{2}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="changeCurrentChangeRequest">/WEB-INF/jsp/roles/OrganizationalContact/roleCrInfo.jsp</result>
+        </action>
+        <action name="ajax/roles/*/OrganizationalContact/results/*" class="gov.nih.nci.po.web.roles.OrganizationalContactAction" method="{2}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/roles/OrganizationalContact/list.jsp</result>
+        </action>
+
+        <!-- Organization -> Edit/Curate -> Assign Organizational Roles -->
+        <action name="roles/organizational/*/*" class="gov.nih.nci.po.web.roles.{1}Action" method="{2}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="input">/WEB-INF/jsp/roles/organizational/{1}/form.jsp</result>
+            <result name="success">/WEB-INF/jsp/roles/organizational/{1}/manage.jsp</result>
+        </action>
+        <action name="ajax/roles/organizational/*/*" class="gov.nih.nci.po.web.roles.{1}Action" method="{2}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="changeCurrentChangeRequest">/WEB-INF/jsp/roles/organizational/{1}/roleCrInfo.jsp</result>
+        </action>
+        <action name="ajax/roles/organizational/*/results/*" class="gov.nih.nci.po.web.roles.{1}Action" method="{2}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/roles/organizational/{1}/list.jsp</result>
+        </action>
+
+        <!-- ResearchOrganization -> Support changing Funding Mechanism -->
+        <action name="ajax/roles/organizational/ResearchOrganization/funding/*" class="gov.nih.nci.po.web.roles.ResearchOrganizationAction" method="{1}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="changeResearchOrganizationType">/WEB-INF/jsp/roles/organizational/ResearchOrganization/selectFundingMechanism.jsp</result>
+        </action>
+
+        <!-- Person -> Edit/Curate -> Assign Person Roles -->
+        <action name="roles/person/*/*" class="gov.nih.nci.po.web.roles.{1}Action" method="{2}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="input">/WEB-INF/jsp/roles/person/{1}/form.jsp</result>
+            <result name="success">/WEB-INF/jsp/roles/person/{1}/manage.jsp</result>
+        </action>
+        <action name="ajax/roles/person/*/*" class="gov.nih.nci.po.web.roles.{1}Action" method="{2}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="changeCurrentChangeRequest">/WEB-INF/jsp/roles/person/{1}/roleCrInfo.jsp</result>
+        </action>
+        <action name="ajax/roles/person/*/results/*" class="gov.nih.nci.po.web.roles.{1}Action" method="{2}">
+            <interceptor-ref name="poPerMethodValidationStack" />
+            <result name="success">/WEB-INF/jsp/roles/person/{1}/list.jsp</result>
+        </action>
+
+        <action name="import/ctep/org/*" class="gov.nih.nci.po.web.externalimport.CtepImportAction" method="{1}">
+            <interceptor-ref name="poDefaultStack" />
+            <interceptor-ref name="tokenSession">
+                <param name="includeMethods">uploadOrganizations</param>
+            </interceptor-ref>
+            <result name="input">/WEB-INF/jsp/import/ctep/importOrgs.jsp</result>
+            <result name="success">/WEB-INF/jsp/import/ctep/importOrgs.jsp</result>
+        </action>
+
+        <action name="import/ctep/person/*" class="gov.nih.nci.po.web.externalimport.CtepImportAction" method="{1}">
+            <interceptor-ref name="poDefaultStack" />
+            <interceptor-ref name="tokenSession">
+                <param name="includeMethods">uploadPeople</param>
+            </interceptor-ref>
+            <result name="input">/WEB-INF/jsp/import/ctep/importPeople.jsp</result>
+            <result name="success">/WEB-INF/jsp/import/ctep/importPeople.jsp</result>
+        </action>
+        
+        <action name="import/ctep/jms/*" class="gov.nih.nci.po.web.externalimport.CtepImportAction" method="{1}">
+            <interceptor-ref name="poDefaultStack" />
+            <result name="input">/WEB-INF/jsp/import/ctep/mockCtepJms.jsp</result>
+            <result name="success">/WEB-INF/jsp/import/ctep/mockCtepJms.jsp</result>
+        </action>
+        
+        <action name="ajax/curate/states" class="gov.nih.nci.po.web.curation.StatesAction" method="loadCountry">
+            <result name="success">/WEB-INF/jsp/curate/states.jsp</result>
+        </action>
+    </package>
+</struts>
