@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+$Id: install.xml 4757 2008-05-15 20:43:31Z zengje $
+$HeadURL: http://gforge.nci.nih.gov/svnroot/po-ear/trunk/software/install.xml $
+-->
+<project name="po-ear-installer" default="upgrade" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+  <description>
+    This build file is part of the COPPA-PO project. This is the po ear install file for the COPPA-PO project. This script is copied into the distribution and executed from the extracted distribution.  It is called from the master install.xml. This script has two flows install and upgrade.
+    Install will do the following
+    * Install binaries
+    * Configure binaries
+    * Install application
+    * Configure application
+    * Re-create database
+    * Upgrade database
+    Upgrade will do the following
+    * Install application
+    * Configure application
+    * Upgrade database
+    The script includes target that may not be used by all projects, but are included in here becaue it is a template. This script has targets to deal with the following, you can delete targets you don't want to work with
+    Application servers (option for grid services also)
+    * JBoss
+    Databases
+    * PostgreSQL
+    This script requires java and ant to run. Every thing else it needs is included in the distribution.
+  </description>
+  <!-- *-ds.xml and WAR -->
+  <property name="po-ear.dir.dist" value="${basedir}/${po-ear.dist.relative.dir}" />
+  <property name="po-ear.ds.file" value="po-ds.xml" />
+  <property name="po-ear.app-sec-conf.file" value="ApplicationSecurityConfig.xml" />
+  <property name="po-ear.hibernate.file" value="hibernate.cfg.xml" />
+  <property name="po-ear.ear.file" value="po.ear" />
+  <property name="resource.file.jboss-csm-lib" value="jboss-csm-libs.zip" />
+
+  <target name="install:po-ear-jboss:clean" unless="exclude.po-ear">
+  	    <delete includeemptydirs="false" verbose="true" failonerror="false">
+  	        <fileset dir="${jboss6.home}/standalone/deployments" includes="**/*.ear"/>
+  	    </delete>
+  </target>
+
+  <!-- Targets begin -->
+  <target name="install:po-ear-jboss:init" depends="common:init:pre">
+  </target>
+  <target name="common:po-ear-jboss:init" depends="common:init:pre" unless="exclude.po-ear">
+      <property name="po-ear-jboss.ssl.enable" value="false"/>
+      <property name="po-ear-jboss.home" value="${jboss6.home}"/>
+      <if>
+          <equals arg1="${po-ear-jboss.http-connector.remove}" arg2="true"/>
+          <then>
+              <property name="po-ear-jboss.application.url" value="https://${jboss.server.hostname}:${jboss.grid.secure.port}/po-web"/>
+          </then>
+          <else>
+              <property name="po-ear-jboss.application.url" value="http://${jboss.server.hostname}:${jboss.server.port}/po-web"/>
+          </else>
+      </if>
+      <available file="${po-ear-jboss.home}/server/${po-ear-jboss.server.name}/conf/jboss-service.xml" property="po-ear-jboss.exists"/>
+      <basename file="${po-ear-jboss.ssl.keystore.location}" property="po-ear-jboss.ssl.keystore.file"/>
+      <dirname file="${po-ear-jboss.ssl.keystore.location}" property="po-ear-jboss.ssl.keystore.dir"/>
+      <basename file="${po-ear-jboss.grid.secure.cert.location}" property="po-ear-jboss.grid.secure.cert.file"/>
+      <dirname file="${po-ear-jboss.grid.secure.cert.location}" property="po-ear-jboss.grid.secure.dir"/>
+      <basename file="${po-ear-jboss.grid.secure.key.location}" property="po-ear-jboss.grid.secure.key.file"/>
+      <property name="po-ear-jboss.socket.ports" value="${jboss.server.port},${jboss.server.rmi.port},${jboss.server.jndi.port},${jboss.service.rmiobject.port},${jboss.jms.port},${jboss.web.service.port}"/>
+  </target>
+
+  <target name="install:po-ear-jboss:binaries" unless="exclude.po-ear">
+   
+  </target>
+
+  <target name="install:po-ear-jboss:app" 
+            description="Deploy po-ear po-ear.ear, po-ear-api.war and common libraries"
+            unless="exclude.po-ear">
+  	
+    <copy file="${po-ear.dir.dist}/${po-ear.ear.file}" todir="${jboss6.home}/standalone/deployments" overwrite="true" verbose="true" />
+    <copy file="${jboss-conf.dist.dir}/standalone.xml" todir="${jboss6.home}/standalone/configuration" overwrite="true" verbose="true" />
+  	<unzip dest="${jboss6.home}" src="${jboss-conf.dist.dir}/jboss6_postgres_jdbc_module.zip"   />
+    
+  </target>
+
+  <target name="install:po-ear-jboss:app:configure" description="Configure po-ear application" unless="exclude.po-ear">
+    
+  </target>
+
+    <target name="install:po-ear-jboss:configure" unless="exclude.po-ear">        
+    </target>
+
+  <!-- Calls to bda macros for basic functionality -->
+  <target name="install:po-ear-jboss:stop" unless="exclude.po-ear">
+  	
+  	 <exec executable="cmd" osfamily="windows" timeout="30000">
+  	    <arg value="/c"/>
+  	    <arg value="${jboss6.home}/bin/jboss-cli.bat"/>  	
+  	    <arg value="--connect"/>
+  	 	<arg value="shutdown"/>
+  	 	<env key="NOPAUSE" value="true"/>
+        <env key="JBOSS_HOME" value="${jboss6.home}"/>
+  	  </exec>
+  	
+    <exec executable="${jboss6.home}/bin/jboss-cli.sh" osfamily="unix" timeout="30000">
+      <arg value="--connect"/>
+      <arg value="shutdown"/>
+      <env key="NOPAUSE" value="true"/>
+      <env key="JBOSS_HOME" value="${jboss6.home}"/>
+    </exec>
+
+  </target>
+
+    <target name="install:po-ear-jboss:start" unless="exclude.po-ear">
+    	
+        <exec executable="nohup" osfamily="unix" dir="${jboss6.home}/bin" spawn="true">
+            <env key="NOPAUSE" value="true" />
+            <env key="JBOSS_HOME" value=""/>
+            <arg line="./standalone.sh" />
+        </exec>
+
+        <exec osfamily="windows" executable="${bda-utils.resource.dir}/psexec.exe" dir="${jboss6.home}/bin" spawn="true" >
+            <env key="NOPAUSE" value="true" />
+            <env key="JBOSS_HOME" value=""/>
+            <arg line="-d -i -w ${jboss6.home}/bin ${jboss6.home}/bin/standalone.bat" />
+        </exec>
+        <sleep seconds="15" />
+
+    </target>
+
+    <target name="install:po-ear-jboss:validation:pre-install" description="Runs pre-install validation checks bda-utils" unless="exclude.po-ear">
+    	<condition property="jboss6.installed">
+    	      <available file="${jboss6.home}/bin" type="dir"/>
+    	</condition>
+    	<fail unless="jboss6.installed" message="JBoss 6.2 EAP is not found in ${jboss6.home}"/>
+    </target>
+	
+    <target name="install:po-ear-jboss:validation:pre-install:ports" description="Checks to see if configured ports are listenting and fails buld, meant to be run after jboss:stop"
+        depends="
+        common:init,
+        install:po-ear-jboss:stop
+        ">
+        
+    </target>
+    <target name="install:po-ear-jboss:validation:post-install" description="Run post-install checks from bda-utils"
+        depends="
+        common:po-ear-jboss:init,
+        common:init,
+        install:po-ear-jboss:start
+        ">
+        
+    </target>
+
+  <!-- Wrapper target to deploy JBOSS container -->
+  <target name="install:po-ear-jboss" description="Wrapper scripts that calls all required targets to install the jboss container" unless="exclude.po-ear"
+      depends="
+      common:po-ear-jboss:init,
+      common:init,
+      install:po-ear-jboss:init,
+      install:po-ear-jboss:validation:pre-install,
+      install:common:validation:pre-install,
+      install:po-ear-jboss:stop,
+      install:po-ear-jboss:validation:pre-install:ports,
+      install:po-ear-jboss:clean,
+      install:po-ear-jboss:binaries,
+      install:po-ear-jboss:configure,
+      install:po-ear-jboss:re-configure,
+      install:po-ear-jboss:app,
+      install:po-ear-jboss:app:configure,
+      install:po-ear-jboss:post,
+      install:po-ear-jboss:start,
+      install:po-ear-jboss:validation:post-install
+      " >
+  </target>
+  <!-- Fixes hibernate dialect and other configurations in code generated at build time.  This is requred because the properties/options selected at build time can be different than those used at install time. -->
+  <target name="install:po-ear-jboss:re-configure" unless="exclude.po-ear">
+  </target>
+
+
+  <target name="upgrade-dac:po-ear-jboss" description="Wrapper scripts that calls all required targets to install the jboss container" unless="exclude.po-ear"
+      depends="
+      upgrade:po-ear-jboss:init,
+      common:po-ear-jboss:init,
+      common:init,
+      install:po-ear-jboss:init,
+      install:po-ear-jboss:validation:pre-install,
+      install:common:validation:pre-install,
+      install:po-ear-jboss:stop,
+      install:po-ear-jboss:validation:pre-install:ports,
+      install:po-ear-jboss:clean,
+      install:po-ear-jboss:binaries,
+      install:po-ear-jboss:configure,
+      install:po-ear-jboss:re-configure,
+      install:po-ear-jboss:app,
+      install:po-ear-jboss:app:configure,
+      upgrade:po-ear-jboss:post,
+      install:po-ear-jboss:post,
+      install:po-ear-jboss:start,
+      install:po-ear-jboss:validation:post-install
+      " >
+  </target>
+  <target name="upgrade-cm:po-ear-jboss" description="Wrapper scripts that calls all required targets to install the jboss container" unless="exclude.po-ear"
+      depends="
+      upgrade:po-ear-jboss:init,
+      common:po-ear-jboss:init,
+      common:init,
+      install:po-ear-jboss:init,
+      install:po-ear-jboss:validation:pre-install,
+      install:common:validation:pre-install,
+      install:po-ear-jboss:stop,
+      install:po-ear-jboss:validation:pre-install:ports,
+      install:po-ear-jboss:configure,
+      install:po-ear-jboss:re-configure,
+      install:po-ear-jboss:app,
+      install:po-ear-jboss:app:configure,
+      upgrade:po-ear-jboss:post,
+      install:po-ear-jboss:post,
+      install:po-ear-jboss:start,
+      install:po-ear-jboss:validation:post-install
+      " >
+  </target>
+
+  <target name="upgrade-ncm:po-ear-jboss" description="Wrapper scripts that calls all required targets to install the jboss container" unless="exclude.po-ear"
+      depends="
+      upgrade:po-ear-jboss:init,
+      common:po-ear-jboss:init,
+      common:init,
+      install:po-ear-jboss:init,
+      install:po-ear-jboss:validation:pre-install,
+      install:common:validation:pre-install,
+      install:po-ear-jboss:stop,
+      install:po-ear-jboss:validation:pre-install:ports,
+      install:po-ear-jboss:re-configure,
+      install:po-ear-jboss:app,
+      install:po-ear-jboss:app:configure,
+      upgrade:po-ear-jboss:post,
+      install:po-ear-jboss:post,
+      install:po-ear-jboss:start,
+      install:po-ear-jboss:validation:post-install
+      " >
+  </target>
+
+  <target name="install:po-ear-jboss:post" unless="exclude.po-ear">
+  </target>
+
+  <target name="upgrade:po-ear-jboss:init"
+      depends="
+      upgrade:po-ear-jboss:init:prep,
+      upgrade:po-ear-jboss:readers:bda,
+      upgrade:po-ear-jboss:readers:custom
+      ">
+      <properties-print
+          properties.list="${read.properties.list}"
+          />
+      <properties-exist
+          properties.list="${read.properties.list}"
+          />
+      <properties-write
+          properties.list="${read.properties.list}"
+          />
+  </target>
+
+  <target name="upgrade:po-ear-jboss:init:prep" depends="upgrade:common:init:prep">
+  </target>
+
+  <target name="upgrade:po-ear-jboss:readers:custom">
+      <!-- call your custom readers here, two properties included in these scripts that don't have readers are "fs-data.base.dir, mail.smtp.server" -->
+  </target>
+
+  <target name="upgrade:po-ear-jboss:readers:bda" if="jboss.exists">
+  </target>
+
+  <target name="upgrade:po-ear-jboss:post">
+  </target>
+</project>

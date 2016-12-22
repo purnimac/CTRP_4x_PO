@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profilesXml xmlns="http://maven.apache.org/PROFILES/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/PROFILES/1.0.0 http://maven.apache.org/xsd/profiles-1.0.0.xsd">    
+    <profiles>
+        <profile>
+            <id>bda</id>
+            <properties>
+            
+                <ldap.url>@ldap.url@</ldap.url>		        
+                <ldap.user>@ldap.user@</ldap.user>
+                <ldap.password>@ldap.password@</ldap.password>
+                <ldap.security.authentication>@ldap.security.authentication@</ldap.security.authentication>
+                <ldap.security.protocol>@ldap.security.protocol@</ldap.security.protocol>
+                <ldap.timeouts.connect>@ldap.timeouts.connect@</ldap.timeouts.connect>
+                <ldap.timeouts.read>@ldap.timeouts.read@</ldap.timeouts.read>
+                <ldap.context>@ldap.context@</ldap.context>
+                <ldap.uid.attrname>@ldap.uid.attrname@</ldap.uid.attrname>
+                                
+                <database.hostname>@database.server@</database.hostname>
+                <database.port>@database.port@</database.port>
+                <database.url.prefix>jdbc:postgresql://@database.server@:@database.port@/</database.url.prefix>
+                <database.name>@database.name@</database.name>
+                <jdbc.username>@database.user@</jdbc.username>
+                <jdbc.password>@database.password@</jdbc.password>               
+
+                <!-- po-log4j.xml -->
+                <log.level.nci-commons>@app.log.level@</log.level.nci-commons>
+                <log.level.po>@app.log.level@</log.level.po>
+                <log.level.default>@app.log.level.default@</log.level.default>
+
+                <log.smtp.host>@app.log.smtp.host@</log.smtp.host>
+                <log.smtp.from>@app.log.smtp.from@</log.smtp.from>
+                <log.smtp.to>@app.log.smtp.to@</log.smtp.to>
+
+                <ctep.username>@ctep.username@</ctep.username>
+                <ctep.password>@ctep.password@</ctep.password>
+                <ctep.url>@ctep.url@</ctep.url>
+                <ctep.jms.client.id>@ctep.jms.client.id@</ctep.jms.client.id>
+                <ctep.jms.subscription.name>@ctep.jms.subscription.name@</ctep.jms.subscription.name>
+                <ctep.jms.topic.connection.factory.name>@ctep.jms.topic.connection.factory.name@</ctep.jms.topic.connection.factory.name>
+                <ctep.jms.topic.name>@ctep.jms.topic.name@</ctep.jms.topic.name>
+
+                <helpUrl>@wikiHelp.baseUrl@</helpUrl>
+                <usersGuideUrl>@wikiUsersGuide.url@</usersGuideUrl>
+            </properties>
+        </profile>
+        <profile>
+            <!-- To use specify the following: -Dpo.maven.profile.list=local,bda,quick -->
+            <id>quick</id>
+            <properties>
+                 <cobertura.check.haltOnFailure>false</cobertura.check.haltOnFailure>
+                 <skipTests>true</skipTests>
+                 <pmd.skip>true</pmd.skip>
+                 <checkstyle.skip>true</checkstyle.skip>
+                 <cpd.skip>true</cpd.skip>
+            </properties>
+       </profile>
+    </profiles>
+</profilesXml>
