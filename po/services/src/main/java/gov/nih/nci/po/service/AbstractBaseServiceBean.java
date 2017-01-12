@@ -137,7 +137,7 @@ public abstract class AbstractBaseServiceBean<T extends PersistentObject>
      * @return the object
      */
     @SuppressWarnings(UNCHECKED)
-    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public T getById(long id) {
         return (T) PoHibernateUtil.getCurrentSession().get(getTypeArgument(), id);
     }
@@ -148,7 +148,7 @@ public abstract class AbstractBaseServiceBean<T extends PersistentObject>
      * @return the object
      */
     @SuppressWarnings(UNCHECKED)
-    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public List<T> getByIds(Long[] ids) {
         if (ids == null || ids.length == 0) {
             return Collections.EMPTY_LIST;
@@ -189,7 +189,7 @@ public abstract class AbstractBaseServiceBean<T extends PersistentObject>
       *     the error messages apply to the type/class
       * @see PoHibernateUtil.validate(entity)
       */
-    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Map<String, String[]> validate(T entity) {
          Map<String, String[]> messages = HibernateHelper.validate(entity);
          messages.putAll(UsOrCanadaPhoneHelper.phonesValidCheck(entity));

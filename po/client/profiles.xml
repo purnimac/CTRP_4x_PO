@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profilesXml xmlns="http://maven.apache.org/PROFILES/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/PROFILES/1.0.0 http://maven.apache.org/xsd/profiles-1.0.0.xsd">    
+    <profiles>
+        <profile>
+            <id>bda</id>
+            <properties>
+            
+                <ldap.url>ldaps://NIHDCADHUB.nih.gov:636 ldaps://NIHDCADHUB2.nih.gov:636 ldaps://NIHDCADHUB3.nih.gov:636</ldap.url>		        
+                <ldap.user>ctrpldap-dev@nih.gov</ldap.user>
+                <ldap.password>~/.ctrp_ldap_password</ldap.password>
+                <ldap.security.authentication>simple</ldap.security.authentication>
+                <ldap.security.protocol>ssl</ldap.security.protocol>
+                <ldap.timeouts.connect>30000</ldap.timeouts.connect>
+                <ldap.timeouts.read>30000</ldap.timeouts.read>
+                <ldap.context>OU=NIH,OU=AD,DC=nih,DC=gov</ldap.context>
+                <ldap.uid.attrname>sAMAccountName</ldap.uid.attrname>
+                                
+                <database.hostname>localhost</database.hostname>
+                <database.port>5432</database.port>
+                <database.url.prefix>jdbc:postgresql://localhost:5432/</database.url.prefix>
+                <database.name>podb</database.name>
+                <jdbc.username>pouser</jdbc.username>
+                <jdbc.password>pouser</jdbc.password>               
+
+                <!-- po-log4j.xml -->
+                <log.level.nci-commons>INFO</log.level.nci-commons>
+                <log.level.po>INFO</log.level.po>
+                <log.level.default>WARN</log.level.default>
+
+                <log.smtp.host>mailfwd.nih.gov</log.smtp.host>
+                <log.smtp.from>ctrppo-dev@example.com</log.smtp.from>
+                <log.smtp.to>ctrppo-dev@example.com</log.smtp.to>
+
+                <ctep.username>coppauser20</ctep.username>
+                <ctep.password>coppa#2009</ctep.password>
+                <ctep.url>t3://gappsbeta-ctep.nci.nih.gov:7036</ctep.url>
+                <ctep.jms.client.id>POApplication-mylocal</ctep.jms.client.id>
+                <ctep.jms.subscription.name>JMSSUBSCRIBER</ctep.jms.subscription.name>
+                <ctep.jms.topic.connection.factory.name>jms/weblogicConnectionFactory</ctep.jms.topic.connection.factory.name>
+                <ctep.jms.topic.name>jms/ces_out_topic</ctep.jms.topic.name>
+
+                <helpUrl>https://wiki.nci.nih.gov/x/ExByAg#PersonandOrganizationCurationPortalHelpTopics</helpUrl>
+                <usersGuideUrl>https://wiki.nci.nih.gov/x/7ZF4B</usersGuideUrl>
+            </properties>
+        </profile>
+        <profile>
+            <!-- To use specify the following: -Dpo.maven.profile.list=local,bda,quick -->
+            <id>quick</id>
+            <properties>
+                 <cobertura.check.haltOnFailure>false</cobertura.check.haltOnFailure>
+                 <skipTests>true</skipTests>
+                 <pmd.skip>true</pmd.skip>
+                 <checkstyle.skip>true</checkstyle.skip>
+                 <cpd.skip>true</cpd.skip>
+            </properties>
+       </profile>
+    </profiles>
+</profilesXml>

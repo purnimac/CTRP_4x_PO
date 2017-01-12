@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<databaseChangeLog logicalFilePath="/tmp/po/db-upgrade.xml"
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.7"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.7
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.7.xsd">
+    <preConditions>            
+        <dbms type="postgresql" />                     
+    </preConditions>                                       
+    <changeSet id="2" author="smiller" runOnChange="false">   
+        <validCheckSum>ANY</validCheckSum>     
+        <comment>version 1.0 sql files</comment>
+        <sqlFile path="/Users/kasubaghasridvr/CTRP_4x/code/po/services/src/main/db/db-install/postgresql/po-create-schema.sql" />
+        <sqlFile path="/Users/kasubaghasridvr/CTRP_4x/code/po/services/src/main/db/db-install/postgresql/csmCreateSchema.sql" />
+        <sqlFile path="/Users/kasubaghasridvr/CTRP_4x/code/po/services/src/main/db/db-install/postgresql/countries.sql" />
+        <sqlFile path="/Users/kasubaghasridvr/CTRP_4x/code/po/services/src/main/db/db-install/postgresql/oversightcommitteetypes.sql" />
+        <sqlFile path="/Users/kasubaghasridvr/CTRP_4x/code/po/services/src/main/db/db-install/postgresql/researchorganizationtypes.sql" />
+        <sqlFile path="/Users/kasubaghasridvr/CTRP_4x/code/po/services/src/main/db/db-install/postgresql/fundingmechanisms.sql" />
+        <sqlFile path="/Users/kasubaghasridvr/CTRP_4x/code/po/services/src/main/db/db-install/postgresql/rot_fundingmech_mapping.sql" />
+        <sqlFile path="/Users/kasubaghasridvr/CTRP_4x/code/po/services/src/main/db/db-install/postgresql/organizationalcontacttypes.sql" />
+        <sqlFile path="/Users/kasubaghasridvr/CTRP_4x/code/po/services/src/main/db/db-install/postgresql/csmBootstrapData.sql" />
+        <sqlFile path="/Users/kasubaghasridvr/CTRP_4x/code/po/services/src/main/db/db-install/postgresql/csmTestUsers.sql" />
+        <sqlFile path="/Users/kasubaghasridvr/CTRP_4x/code/po/services/src/main/db/db-install/postgresql/extraCreateSchema.sql" />
+        <sqlFile path="/Users/kasubaghasridvr/CTRP_4x/code/po/services/src/main/db/db-install/postgresql/bootstrapData.sql" />
+    </changeSet>
+</databaseChangeLog>

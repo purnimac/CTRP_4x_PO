@@ -1,0 +1,113 @@
+
+package org.iso._21090;
+
+import java.util.Collection;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
+
+
+/**
+ * <p>Java class for TEL.Person complex type.
+ * 
+ * <p>The following schema fragment specifies the expected content contained within this class.
+ * 
+ * <pre>
+ * &lt;complexType name="TEL.Person">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{uri:iso.org:21090}TEL">
+ *       &lt;sequence>
+ *         &lt;element name="useablePeriod" type="{uri:iso.org:21090}QSET_TS" minOccurs="0"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "TEL.Person")
+@XmlSeeAlso({
+    TELPhone.class,
+    TELEmail.class
+})
+public class TELPerson
+    extends TEL
+{
+
+
+    @Override
+    public TELPerson withUseablePeriod(QSETTS value) {
+        setUseablePeriod(value);
+        return this;
+    }
+
+    @Override
+    public TELPerson withUse(TelecommunicationAddressUse... values) {
+        if (values!= null) {
+            for (TelecommunicationAddressUse value: values) {
+                getUse().add(value);
+            }
+        }
+        return this;
+    }
+
+    @Override
+    public TELPerson withUse(Collection<TelecommunicationAddressUse> values) {
+        if (values!= null) {
+            getUse().addAll(values);
+        }
+        return this;
+    }
+
+    @Override
+    public TELPerson withValue(String value) {
+        setValue(value);
+        return this;
+    }
+
+    @Override
+    public TELPerson withNullFlavor(NullFlavor value) {
+        setNullFlavor(value);
+        return this;
+    }
+
+    @Override
+    public TELPerson withFlavorId(String value) {
+        setFlavorId(value);
+        return this;
+    }
+
+    @Override
+    public TELPerson withUpdateMode(UpdateMode value) {
+        setUpdateMode(value);
+        return this;
+    }
+
+    @Override
+    public TELPerson withValidTimeLow(String value) {
+        setValidTimeLow(value);
+        return this;
+    }
+
+    @Override
+    public TELPerson withValidTimeHigh(String value) {
+        setValidTimeHigh(value);
+        return this;
+    }
+
+    @Override
+    public TELPerson withControlActRoot(String value) {
+        setControlActRoot(value);
+        return this;
+    }
+
+    @Override
+    public TELPerson withControlActExtension(String value) {
+        setControlActExtension(value);
+        return this;
+    }
+
+}

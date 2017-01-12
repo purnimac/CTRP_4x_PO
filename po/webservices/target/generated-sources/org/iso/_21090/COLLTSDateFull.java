@@ -1,0 +1,79 @@
+
+package org.iso._21090;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
+
+
+/**
+ * <p>Java class for COLL_TS.Date.Full complex type.
+ * 
+ * <p>The following schema fragment specifies the expected content contained within this class.
+ * 
+ * <pre>
+ * &lt;complexType name="COLL_TS.Date.Full">
+ *   &lt;complexContent>
+ *     &lt;extension base="{uri:iso.org:21090}ANY">
+ *     &lt;/extension>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "COLL_TS.Date.Full")
+@XmlSeeAlso({
+    DSETTSDateFull.class,
+    BAGTSDateFull.class
+})
+public abstract class COLLTSDateFull
+    extends ANY
+{
+
+
+    @Override
+    public COLLTSDateFull withNullFlavor(NullFlavor value) {
+        setNullFlavor(value);
+        return this;
+    }
+
+    @Override
+    public COLLTSDateFull withFlavorId(String value) {
+        setFlavorId(value);
+        return this;
+    }
+
+    @Override
+    public COLLTSDateFull withUpdateMode(UpdateMode value) {
+        setUpdateMode(value);
+        return this;
+    }
+
+    @Override
+    public COLLTSDateFull withValidTimeLow(String value) {
+        setValidTimeLow(value);
+        return this;
+    }
+
+    @Override
+    public COLLTSDateFull withValidTimeHigh(String value) {
+        setValidTimeHigh(value);
+        return this;
+    }
+
+    @Override
+    public COLLTSDateFull withControlActRoot(String value) {
+        setControlActRoot(value);
+        return this;
+    }
+
+    @Override
+    public COLLTSDateFull withControlActExtension(String value) {
+        setControlActExtension(value);
+        return this;
+    }
+
+}

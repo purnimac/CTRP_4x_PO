@@ -1,0 +1,53 @@
+
+package gov.nih.nci.coppa.po;
+
+import java.util.Collection;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+
+/**
+ * <p>Java class for anonymous complex type.
+ * 
+ * <p>The following schema fragment specifies the expected content contained within this class.
+ * 
+ * <pre>
+ * &lt;complexType>
+ *   &lt;complexContent>
+ *     &lt;extension base="{http://po.coppa.nci.nih.gov}StringMapType">
+ *     &lt;/extension>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "")
+@XmlRootElement(name = "StringMap")
+public class StringMap
+    extends StringMapType
+{
+
+
+    @Override
+    public StringMap withEntry(StringMapType.Entry... values) {
+        if (values!= null) {
+            for (StringMapType.Entry value: values) {
+                getEntry().add(value);
+            }
+        }
+        return this;
+    }
+
+    @Override
+    public StringMap withEntry(Collection<StringMapType.Entry> values) {
+        if (values!= null) {
+            getEntry().addAll(values);
+        }
+        return this;
+    }
+
+}
