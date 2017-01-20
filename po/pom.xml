@@ -49,7 +49,7 @@
         <maven-ejb-plugin.version>2.2</maven-ejb-plugin.version>
         <maven-antrun-plugin.version>1.3</maven-antrun-plugin.version>
         <maven-war-plugin.version>2.1.1</maven-war-plugin.version>
-        <compileSource>1.6</compileSource>
+        <compileSource>1.7</compileSource>
         <hibernate.version>3.3.0.SP1</hibernate.version>
         <hibernate.annotations.version>3.4.0.GA</hibernate.annotations.version>
         <hibernate.validator.version>3.1.0.GA</hibernate.validator.version>
@@ -82,9 +82,9 @@
     </properties>
 
     <scm>
-        <connection>scm:svn:https://ncisvn.nci.nih.gov/svn/coppa/trunk/code/po</connection>
-        <developerConnection>scm:svn:https://ncisvn.nci.nih.gov/svn/coppa/trunk/code/po</developerConnection>
-        <url>https://ncisvn.nci.nih.gov/svn/coppa/trunk/code/po</url>
+        <url>https://github.com/CBIIT/CTRP_4x_PO</url>
+        <connection>scm:git:https://github.com/CBIIT/CTRP_4x_PO.git</connection>
+        <developerConnection>scm:git:git@github.com:CBIIT/CTRP_4x_PO.git</developerConnection>
     </scm>
    
     <modules>
