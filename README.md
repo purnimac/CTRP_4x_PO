@@ -40,3 +40,4 @@ Properties
 ----------
 Properties at  CTRP_4x_PO/build-po/tier-properties (for IntTest and later. CI will pull from local properties in the pom.xml).
 
+Developers Guide at - https://wiki.nci.nih.gov/display/CTRPproject/CTRP+Developer%27s+Guide
