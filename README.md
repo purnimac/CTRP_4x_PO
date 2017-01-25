@@ -8,7 +8,7 @@ Requirements:
 
   * Java 7 & JRE 1.7 
    
-  * PostGres 9.2
+
 
 Build Commands
 -------------
