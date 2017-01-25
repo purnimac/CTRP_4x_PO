@@ -20,9 +20,10 @@ before_install:
   - mvn -v
 script:
   ###Build Script for PO
-  - cd po
+  - cd build-po
   # - mvn -Dhttps.protocols=TLSv1.1,TLSv1.2 package -e
-  - mvn -Dhttps.protocols=TLSv1.1,TLSv1.2 clean install -e
+  # - mvn -Dhttps.protocols=TLSv1.1,TLSv1.2 clean install -e
+  - ant -f build-lite.xml install
 
 after_success:
   - pwd
