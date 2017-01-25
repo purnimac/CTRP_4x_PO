@@ -23,8 +23,8 @@ script:
   # - cp build-po/tier-properties/local.properties local.properties
   - cd po
   # - mvn -Dhttps.protocols=TLSv1.1,TLSv1.2 package -e
-  - mvn -Dhttps.protocols=TLSv1.1,TLSv1.2 clean install -e
-  #- ant -f build-lite.xml run
+  #- mvn -Dhttps.protocols=TLSv1.1,TLSv1.2 clean install -e
+  - ant -f build-lite.xml dist
 
 after_success:
   - pwd
