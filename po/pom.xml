@@ -120,7 +120,7 @@
                     <target>${compileSource}</target>
                 </configuration>
             </plugin>
-            <!--plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>${maven-checkstyle-plugin.version}</version>
@@ -139,8 +139,8 @@
                         <version>${nci-commons.version}</version>
                     </dependency>
                 </dependencies>
-            </plugin-->
-            <!--plugin>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>                               
                 <version>${maven-pmd-plugin.version}</version>
@@ -160,7 +160,7 @@
                         <version>${nci-commons.version}</version>
                     </dependency>
                 </dependencies>
-            </plugin-->
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
