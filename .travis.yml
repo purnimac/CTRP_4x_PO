@@ -31,7 +31,7 @@ before_install:
 script:
   ###Build Script for PO
   # - cp build-po/tier-properties/local.properties local.properties
-  - cd build-po
+  - cd /home/travis/build/CBIIT/CTRP_4x_PO/build-po
   # - mvn -Dhttps.protocols=TLSv1.1,TLSv1.2 package -e
   #- mvn -Dhttps.protocols=TLSv1.1,TLSv1.2 clean install -e
   - ant -f build-lite.xml dist
@@ -47,6 +47,7 @@ after_success:
 
   # - bundle exec codeclimate-test-reporter
     #Build Docker image
+  - cd /home/travis/build/CBIIT/CTRP_4x_PO/
   - docker build -t $DOCKER_IMAGE:$DATE -t $DOCKER_IMAGE:latest .
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
   - docker images
