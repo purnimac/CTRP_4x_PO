@@ -29,8 +29,8 @@ script:
 after_success:
   - pwd
   - ls -alth
-  - find ../
-  - find ~/.m2/
+  # - find ~/.m2/
+  - find ~/CBIIT/CTRP_4x_PO/target/
 
 # after_script:
 notifications:
