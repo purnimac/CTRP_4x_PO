@@ -12,7 +12,7 @@ before_install:
   #Set up Docker exports
   - export AUTHOR=`git --no-pager show -s --format='%an <%ae>'`
   - export DATE=`TZ=America/New_York date "+%m-%d-%y-%H%M"`
-  - export DOCKER_IMAGE="ctrp/CTRP_4x_PO"
+  - export DOCKER_IMAGE="ctrp/ctrp_4x_po"
   - echo "TravisBuild=$TRAVIS_BUILD_NUMBER" > build_number.html &&
         echo "Commit=$TRAVIS_COMMIT" >> build_number.html       &&
         echo "TravisBuildID=$TRAVIS_BUILD_ID" >> build_number.html    &&
@@ -42,8 +42,8 @@ after_success:
   - pwd
   - ls -alth
   # - find ~/.m2/
-  - ls -alth ~/CBIIT/CTRP_4x_PO
-  - find ~/CBIIT/CTRP_4x_PO/target/
+  - ls -alth /home/travis/build/CBIIT/CTRP_4x_PO/
+  - find /home/travis/build/CBIIT/CTRP_4x_PO/build-po/target/
 
   # - bundle exec codeclimate-test-reporter
     #Build Docker image
