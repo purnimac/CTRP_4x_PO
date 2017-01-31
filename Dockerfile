@@ -40,5 +40,4 @@ Run jboss -version
 Run which java
 Run java -version
 
-ADD target/po/dist/exploded/po-ear/po.ear $JBOSS_HOME/standalone/deployments
 ADD /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear/po.ear $JBOSS_HOME/standalone/deployments
