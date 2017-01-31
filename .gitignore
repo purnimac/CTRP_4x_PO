@@ -1,2 +1,4 @@
+*/target/**
 po/*/target/
+po/target/
 build-po/common/jboss/
