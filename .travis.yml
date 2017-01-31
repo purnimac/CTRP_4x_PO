@@ -42,6 +42,7 @@ after_success:
   - pwd
   - ls -alth
   # - find ~/.m2/
+  - ls -alth ~/CBIIT/CTRP_4x_PO
   - find ~/CBIIT/CTRP_4x_PO/target/
 
   # - bundle exec codeclimate-test-reporter

@@ -35,4 +35,9 @@ ENV JAVA_HOME /usr/lib/jvm/java
 ENV EAP_HOME /opt/jboss
 ENV JBOSS_HOME /opt/jboss
 
+RUN which jboss
+Run jboss -version
+Run which java
+Run java -version
+
 ADD target/po/dist/exploded/po-ear/po.ear $JBOSS_HOME/standalone/deployments
