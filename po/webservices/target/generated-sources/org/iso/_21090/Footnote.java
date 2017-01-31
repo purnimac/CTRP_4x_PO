@@ -56,15 +56,15 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class Footnote {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "paragraph", namespace = "uri:iso.org:21090", type = Paragraph.class, required = false),
-        @XmlElementRef(name = "sup", namespace = "uri:iso.org:21090", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "content", namespace = "uri:iso.org:21090", type = Content.class, required = false),
-        @XmlElementRef(name = "sub", namespace = "uri:iso.org:21090", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "table", namespace = "uri:iso.org:21090", type = Table.class, required = false),
-        @XmlElementRef(name = "br", namespace = "uri:iso.org:21090", type = Br.class, required = false),
-        @XmlElementRef(name = "linkHtml", namespace = "uri:iso.org:21090", type = LinkHtml.class, required = false),
+        @XmlElementRef(name = "sub", namespace = "uri:iso.org:21090", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "list", namespace = "uri:iso.org:21090", type = org.iso._21090.List.class, required = false),
-        @XmlElementRef(name = "renderMultiMedia", namespace = "uri:iso.org:21090", type = RenderMultiMedia.class, required = false)
+        @XmlElementRef(name = "paragraph", namespace = "uri:iso.org:21090", type = Paragraph.class, required = false),
+        @XmlElementRef(name = "renderMultiMedia", namespace = "uri:iso.org:21090", type = RenderMultiMedia.class, required = false),
+        @XmlElementRef(name = "br", namespace = "uri:iso.org:21090", type = Br.class, required = false),
+        @XmlElementRef(name = "sup", namespace = "uri:iso.org:21090", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "linkHtml", namespace = "uri:iso.org:21090", type = LinkHtml.class, required = false),
+        @XmlElementRef(name = "content", namespace = "uri:iso.org:21090", type = Content.class, required = false)
     })
     @XmlMixed
     protected java.util.List<Object> content;
@@ -99,16 +99,16 @@ public class Footnote {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Content }
+     * {@link Table }
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link Paragraph }
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link Table }
-     * {@link Br }
-     * {@link String }
-     * {@link LinkHtml }
-     * {@link RenderMultiMedia }
      * {@link org.iso._21090.List }
+     * {@link String }
+     * {@link Br }
+     * {@link RenderMultiMedia }
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link Content }
+     * {@link LinkHtml }
      * 
      * 
      */

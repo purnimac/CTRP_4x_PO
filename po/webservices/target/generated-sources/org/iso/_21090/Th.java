@@ -95,14 +95,14 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class Th {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "sup", namespace = "uri:iso.org:21090", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "content", namespace = "uri:iso.org:21090", type = Content.class, required = false),
         @XmlElementRef(name = "sub", namespace = "uri:iso.org:21090", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "footnoteRef", namespace = "uri:iso.org:21090", type = FootnoteRef.class, required = false),
-        @XmlElementRef(name = "br", namespace = "uri:iso.org:21090", type = Br.class, required = false),
         @XmlElementRef(name = "footnote", namespace = "uri:iso.org:21090", type = Footnote.class, required = false),
+        @XmlElementRef(name = "renderMultiMedia", namespace = "uri:iso.org:21090", type = RenderMultiMedia.class, required = false),
+        @XmlElementRef(name = "br", namespace = "uri:iso.org:21090", type = Br.class, required = false),
+        @XmlElementRef(name = "sup", namespace = "uri:iso.org:21090", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "footnoteRef", namespace = "uri:iso.org:21090", type = FootnoteRef.class, required = false),
         @XmlElementRef(name = "linkHtml", namespace = "uri:iso.org:21090", type = LinkHtml.class, required = false),
-        @XmlElementRef(name = "renderMultiMedia", namespace = "uri:iso.org:21090", type = RenderMultiMedia.class, required = false)
+        @XmlElementRef(name = "content", namespace = "uri:iso.org:21090", type = Content.class, required = false)
     })
     @XmlMixed
     protected List<Object> content;
@@ -163,14 +163,14 @@ public class Th {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link Content }
+     * {@link Footnote }
+     * {@link String }
+     * {@link RenderMultiMedia }
+     * {@link Br }
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link FootnoteRef }
-     * {@link Br }
-     * {@link String }
+     * {@link Content }
      * {@link LinkHtml }
-     * {@link Footnote }
-     * {@link RenderMultiMedia }
      * 
      * 
      */

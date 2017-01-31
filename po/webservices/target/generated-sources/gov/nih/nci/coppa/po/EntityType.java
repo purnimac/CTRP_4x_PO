@@ -39,8 +39,8 @@ import javax.xml.bind.annotation.XmlType;
 public class EntityType {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "Person", namespace = "http://po.coppa.nci.nih.gov", type = Person.class, required = false),
-        @XmlElementRef(name = "Organization", namespace = "http://po.coppa.nci.nih.gov", type = Organization.class, required = false)
+        @XmlElementRef(name = "Organization", namespace = "http://po.coppa.nci.nih.gov", type = Organization.class, required = false),
+        @XmlElementRef(name = "Person", namespace = "http://po.coppa.nci.nih.gov", type = Person.class, required = false)
     })
     @XmlMixed
     protected List<Object> content;
@@ -63,9 +63,9 @@ public class EntityType {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Person }
      * {@link String }
      * {@link Organization }
+     * {@link Person }
      * 
      * 
      */

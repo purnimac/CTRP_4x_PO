@@ -94,14 +94,14 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class Th {
 
     @XmlElementRefs({
+        @XmlElementRef(name = "sup", namespace = "uri:iso.org:21090", type = JAXBElement.class),
+        @XmlElementRef(name = "content", namespace = "uri:iso.org:21090", type = Content.class),
+        @XmlElementRef(name = "renderMultiMedia", namespace = "uri:iso.org:21090", type = RenderMultiMedia.class),
+        @XmlElementRef(name = "footnote", namespace = "uri:iso.org:21090", type = Footnote.class),
         @XmlElementRef(name = "footnoteRef", namespace = "uri:iso.org:21090", type = FootnoteRef.class),
         @XmlElementRef(name = "br", namespace = "uri:iso.org:21090", type = Br.class),
-        @XmlElementRef(name = "linkHtml", namespace = "uri:iso.org:21090", type = LinkHtml.class),
-        @XmlElementRef(name = "content", namespace = "uri:iso.org:21090", type = Content.class),
-        @XmlElementRef(name = "footnote", namespace = "uri:iso.org:21090", type = Footnote.class),
         @XmlElementRef(name = "sub", namespace = "uri:iso.org:21090", type = JAXBElement.class),
-        @XmlElementRef(name = "sup", namespace = "uri:iso.org:21090", type = JAXBElement.class),
-        @XmlElementRef(name = "renderMultiMedia", namespace = "uri:iso.org:21090", type = RenderMultiMedia.class)
+        @XmlElementRef(name = "linkHtml", namespace = "uri:iso.org:21090", type = LinkHtml.class)
     })
     @XmlMixed
     protected List<Object> content;
@@ -161,15 +161,15 @@ public class Th {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link Content }
+     * {@link RenderMultiMedia }
+     * {@link Footnote }
+     * {@link LinkHtml }
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link FootnoteRef }
      * {@link Br }
-     * {@link LinkHtml }
-     * {@link Content }
-     * {@link Footnote }
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link String }
-     * {@link RenderMultiMedia }
      * 
      * 
      */

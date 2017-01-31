@@ -1,1 +1,0 @@
-alter table ctepjmslogrecord add constraint ctepjmslogrecord_pkey PRIMARY KEY (messageid);

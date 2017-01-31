@@ -30,19 +30,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Cd }
-     * 
-     */
-    public Cd createCd() {
-        return new Cd();
-    }
-
-    /**
      * Create an instance of {@link Id }
      * 
      */
     public Id createId() {
         return new Id();
+    }
+
+    /**
+     * Create an instance of {@link Cd }
+     * 
+     */
+    public Cd createCd() {
+        return new Cd();
     }
 
     /**

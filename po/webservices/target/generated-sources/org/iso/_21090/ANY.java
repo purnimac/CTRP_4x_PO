@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ANY")
 @XmlSeeAlso({
+    AD.class,
     SLISTTSDate.class,
     NPPDTSDateFull.class,
     SLISTTSBirth.class,
@@ -48,16 +49,15 @@ import javax.xml.bind.annotation.XmlType;
     UVPTELPerson.class,
     UVPTS.class,
     UVPBLNonNull.class,
+    EN.class,
     NPPDTSBirth.class,
     UVPEDDoc.class,
     UVPTELPhone.class,
     NPPDSC.class,
     NPPDTSDateTime.class,
     UVPMO.class,
-    AD.class,
     NPPDSTNT.class,
     NPPDPQ.class,
-    EN.class,
     NPPDEDDocInline.class,
     GLISTTSDateFull.class,
     NPPDTELPerson.class,
@@ -263,8 +263,8 @@ import javax.xml.bind.annotation.XmlType;
     QSETINTNonNeg.class,
     BL.class,
     ST.class,
-    II.class,
-    CD.class
+    CD.class,
+    II.class
 })
 public abstract class ANY
     extends HXIT

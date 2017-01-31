@@ -45,14 +45,14 @@ import javax.xml.bind.annotation.XmlType;
 public class CorrelationType {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "ClinicalResearchStaff", namespace = "http://po.coppa.nci.nih.gov", type = ClinicalResearchStaff.class, required = false),
         @XmlElementRef(name = "OversightCommittee", namespace = "http://po.coppa.nci.nih.gov", type = OversightCommittee.class, required = false),
-        @XmlElementRef(name = "IdentifiedPerson", namespace = "http://po.coppa.nci.nih.gov", type = IdentifiedPerson.class, required = false),
-        @XmlElementRef(name = "IdentifiedOrganization", namespace = "http://po.coppa.nci.nih.gov", type = IdentifiedOrganization.class, required = false),
-        @XmlElementRef(name = "HealthCareFacility", namespace = "http://po.coppa.nci.nih.gov", type = HealthCareFacility.class, required = false),
-        @XmlElementRef(name = "ResearchOrganization", namespace = "http://po.coppa.nci.nih.gov", type = ResearchOrganization.class, required = false),
+        @XmlElementRef(name = "ClinicalResearchStaff", namespace = "http://po.coppa.nci.nih.gov", type = ClinicalResearchStaff.class, required = false),
+        @XmlElementRef(name = "HealthCareProvider", namespace = "http://po.coppa.nci.nih.gov", type = HealthCareProvider.class, required = false),
         @XmlElementRef(name = "OrganizationalContact", namespace = "http://po.coppa.nci.nih.gov", type = OrganizationalContact.class, required = false),
-        @XmlElementRef(name = "HealthCareProvider", namespace = "http://po.coppa.nci.nih.gov", type = HealthCareProvider.class, required = false)
+        @XmlElementRef(name = "IdentifiedOrganization", namespace = "http://po.coppa.nci.nih.gov", type = IdentifiedOrganization.class, required = false),
+        @XmlElementRef(name = "ResearchOrganization", namespace = "http://po.coppa.nci.nih.gov", type = ResearchOrganization.class, required = false),
+        @XmlElementRef(name = "IdentifiedPerson", namespace = "http://po.coppa.nci.nih.gov", type = IdentifiedPerson.class, required = false),
+        @XmlElementRef(name = "HealthCareFacility", namespace = "http://po.coppa.nci.nih.gov", type = HealthCareFacility.class, required = false)
     })
     @XmlMixed
     protected List<Object> content;
@@ -75,15 +75,15 @@ public class CorrelationType {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ClinicalResearchStaff }
      * {@link OversightCommittee }
-     * {@link IdentifiedPerson }
+     * {@link ClinicalResearchStaff }
+     * {@link HealthCareProvider }
      * {@link String }
+     * {@link OrganizationalContact }
      * {@link IdentifiedOrganization }
      * {@link HealthCareFacility }
-     * {@link OrganizationalContact }
+     * {@link IdentifiedPerson }
      * {@link ResearchOrganization }
-     * {@link HealthCareProvider }
      * 
      * 
      */

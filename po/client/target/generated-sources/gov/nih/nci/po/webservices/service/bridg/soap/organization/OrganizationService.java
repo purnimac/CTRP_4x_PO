@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.1
  * 
  */
-@WebServiceClient(name = "OrganizationService", targetNamespace = "http://enterpriseservices.nci.nih.gov/entities/Organization", wsdlLocation = "file:/Users/kasubaghasridvr/CTRP_4x/code/po/client/../webservices/src/main/resources/gov/nih/nci/po/webservices/bridg/Organization.wsdl")
+@WebServiceClient(name = "OrganizationService", targetNamespace = "http://enterpriseservices.nci.nih.gov/entities/Organization", wsdlLocation = "file:/Users/kasubaghasridvr/CTRP_4x/CTRP_4x_PO/po/client/../webservices/src/main/resources/gov/nih/nci/po/webservices/bridg/Organization.wsdl")
 public class OrganizationService
     extends Service
 {
@@ -30,7 +30,7 @@ public class OrganizationService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/Users/kasubaghasridvr/CTRP_4x/code/po/client/../webservices/src/main/resources/gov/nih/nci/po/webservices/bridg/Organization.wsdl");
+            url = new URL("file:/Users/kasubaghasridvr/CTRP_4x/CTRP_4x_PO/po/client/../webservices/src/main/resources/gov/nih/nci/po/webservices/bridg/Organization.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

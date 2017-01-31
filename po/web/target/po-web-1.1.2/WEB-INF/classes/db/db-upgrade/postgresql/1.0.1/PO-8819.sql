@@ -1,1 +1,0 @@
-alter table ctepjmslogrecord add column processing_errors text;

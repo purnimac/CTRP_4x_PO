@@ -53,10 +53,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class Caption {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "sup", namespace = "uri:iso.org:21090", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "sub", namespace = "uri:iso.org:21090", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "footnoteRef", namespace = "uri:iso.org:21090", type = FootnoteRef.class, required = false),
         @XmlElementRef(name = "footnote", namespace = "uri:iso.org:21090", type = Footnote.class, required = false),
+        @XmlElementRef(name = "sup", namespace = "uri:iso.org:21090", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "footnoteRef", namespace = "uri:iso.org:21090", type = FootnoteRef.class, required = false),
         @XmlElementRef(name = "linkHtml", namespace = "uri:iso.org:21090", type = LinkHtml.class, required = false)
     })
     @XmlMixed
@@ -95,9 +95,9 @@ public class Caption {
      * {@link String }
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link FootnoteRef }
      * {@link LinkHtml }
      * {@link Footnote }
-     * {@link FootnoteRef }
      * 
      * 
      */

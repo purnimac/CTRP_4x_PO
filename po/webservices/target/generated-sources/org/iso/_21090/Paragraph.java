@@ -59,15 +59,15 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class Paragraph {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "sup", namespace = "uri:iso.org:21090", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "content", namespace = "uri:iso.org:21090", type = Content.class, required = false),
         @XmlElementRef(name = "sub", namespace = "uri:iso.org:21090", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "footnoteRef", namespace = "uri:iso.org:21090", type = FootnoteRef.class, required = false),
-        @XmlElementRef(name = "br", namespace = "uri:iso.org:21090", type = Br.class, required = false),
-        @XmlElementRef(name = "caption", namespace = "uri:iso.org:21090", type = Caption.class, required = false),
         @XmlElementRef(name = "footnote", namespace = "uri:iso.org:21090", type = Footnote.class, required = false),
+        @XmlElementRef(name = "caption", namespace = "uri:iso.org:21090", type = Caption.class, required = false),
+        @XmlElementRef(name = "renderMultiMedia", namespace = "uri:iso.org:21090", type = RenderMultiMedia.class, required = false),
+        @XmlElementRef(name = "br", namespace = "uri:iso.org:21090", type = Br.class, required = false),
+        @XmlElementRef(name = "sup", namespace = "uri:iso.org:21090", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "footnoteRef", namespace = "uri:iso.org:21090", type = FootnoteRef.class, required = false),
         @XmlElementRef(name = "linkHtml", namespace = "uri:iso.org:21090", type = LinkHtml.class, required = false),
-        @XmlElementRef(name = "renderMultiMedia", namespace = "uri:iso.org:21090", type = RenderMultiMedia.class, required = false)
+        @XmlElementRef(name = "content", namespace = "uri:iso.org:21090", type = Content.class, required = false)
     })
     @XmlMixed
     protected List<Object> content;
@@ -102,16 +102,16 @@ public class Paragraph {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Content }
      * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link FootnoteRef }
-     * {@link Br }
+     * {@link Footnote }
      * {@link String }
      * {@link Caption }
-     * {@link LinkHtml }
-     * {@link Footnote }
+     * {@link Br }
      * {@link RenderMultiMedia }
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link FootnoteRef }
+     * {@link Content }
+     * {@link LinkHtml }
      * 
      * 
      */

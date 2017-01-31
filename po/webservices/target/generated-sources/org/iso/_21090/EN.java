@@ -37,8 +37,8 @@ import javax.xml.bind.annotation.XmlType;
 })
 @XmlSeeAlso({
     ENON.class,
-    ENTN.class,
-    ENPN.class
+    ENPN.class,
+    ENTN.class
 })
 public class EN
     extends ANY

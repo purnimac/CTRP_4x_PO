@@ -44,14 +44,14 @@ import javax.xml.bind.annotation.XmlType;
 public class CorrelationType {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "IdentifiedOrganization", namespace = "http://po.coppa.nci.nih.gov", type = IdentifiedOrganization.class),
-        @XmlElementRef(name = "ClinicalResearchStaff", namespace = "http://po.coppa.nci.nih.gov", type = ClinicalResearchStaff.class),
-        @XmlElementRef(name = "OversightCommittee", namespace = "http://po.coppa.nci.nih.gov", type = OversightCommittee.class),
-        @XmlElementRef(name = "IdentifiedPerson", namespace = "http://po.coppa.nci.nih.gov", type = IdentifiedPerson.class),
-        @XmlElementRef(name = "HealthCareFacility", namespace = "http://po.coppa.nci.nih.gov", type = HealthCareFacility.class),
         @XmlElementRef(name = "ResearchOrganization", namespace = "http://po.coppa.nci.nih.gov", type = ResearchOrganization.class),
+        @XmlElementRef(name = "HealthCareProvider", namespace = "http://po.coppa.nci.nih.gov", type = HealthCareProvider.class),
+        @XmlElementRef(name = "ClinicalResearchStaff", namespace = "http://po.coppa.nci.nih.gov", type = ClinicalResearchStaff.class),
+        @XmlElementRef(name = "HealthCareFacility", namespace = "http://po.coppa.nci.nih.gov", type = HealthCareFacility.class),
         @XmlElementRef(name = "OrganizationalContact", namespace = "http://po.coppa.nci.nih.gov", type = OrganizationalContact.class),
-        @XmlElementRef(name = "HealthCareProvider", namespace = "http://po.coppa.nci.nih.gov", type = HealthCareProvider.class)
+        @XmlElementRef(name = "IdentifiedPerson", namespace = "http://po.coppa.nci.nih.gov", type = IdentifiedPerson.class),
+        @XmlElementRef(name = "IdentifiedOrganization", namespace = "http://po.coppa.nci.nih.gov", type = IdentifiedOrganization.class),
+        @XmlElementRef(name = "OversightCommittee", namespace = "http://po.coppa.nci.nih.gov", type = OversightCommittee.class)
     })
     @XmlMixed
     protected List<Object> content;
@@ -74,15 +74,15 @@ public class CorrelationType {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link IdentifiedOrganization }
-     * {@link ClinicalResearchStaff }
-     * {@link OversightCommittee }
-     * {@link String }
-     * {@link IdentifiedPerson }
-     * {@link HealthCareFacility }
      * {@link ResearchOrganization }
      * {@link HealthCareProvider }
+     * {@link ClinicalResearchStaff }
+     * {@link HealthCareFacility }
+     * {@link IdentifiedOrganization }
      * {@link OrganizationalContact }
+     * {@link IdentifiedPerson }
+     * {@link String }
+     * {@link OversightCommittee }
      * 
      * 
      */

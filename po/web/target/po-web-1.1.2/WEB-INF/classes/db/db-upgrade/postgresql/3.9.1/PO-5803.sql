@@ -1,1 +1,0 @@
-create table ctepjmslogrecord (messageid integer, ctepjms_msg varchar(4000), created_date timestamp);

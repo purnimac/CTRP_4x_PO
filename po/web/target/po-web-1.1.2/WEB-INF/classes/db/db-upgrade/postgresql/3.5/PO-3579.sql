@@ -1,1 +1,0 @@
-update identifiedperson set (status, statusdate) = ('NULLIFIED', current_timestamp) where assigned_identifier_root='Cancer Therapy Evaluation Program Person Identifier';

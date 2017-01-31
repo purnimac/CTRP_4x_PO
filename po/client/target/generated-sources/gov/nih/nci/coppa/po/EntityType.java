@@ -62,9 +62,9 @@ public class EntityType {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Person }
-     * {@link Organization }
      * {@link String }
+     * {@link Organization }
+     * {@link Person }
      * 
      * 
      */
