@@ -22,8 +22,8 @@ RUN yum -y install java-1.7.0-openjdk-devel && yum clean all
 #RUN  yum groupinstall jboss-eap6 -y && yum clean all
 #ADD jboss-eap-6.2.0.zip /opt/
 #ADD https://developers.redhat.com/download-manager/file/jboss-eap-6.2.0.GA.zip /opt/
-#ADD https://s3.amazonaws.com/ctrp-repos/Installs/jboss-eap-6.2.0.zip /opt/
-ADD https://s3.amazonaws.com/ctrp-repos-inttest/Installs/jboss-eap-6.2.0.zip /opt/
+ADD https://s3.amazonaws.com/ctrp-repos/Installs/jboss-eap-6.2.0.zip /opt/
+#ADD https://s3.amazonaws.com/ctrp-repos-inttest/Installs/jboss-eap-6.2.0.zip /opt/
 RUN unzip /opt/jboss-eap-6.2.0.zip
 
 RUN ls /opt/jboss*
