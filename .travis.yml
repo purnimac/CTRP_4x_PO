@@ -45,6 +45,7 @@ after_success:
   # - find ~/.m2/
   # - ls -alth /home/travis/build/CBIIT/CTRP_4x_PO/
   - find /home/travis/build/CBIIT/CTRP_4x_PO/target/
+  - ls -alth /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear
 
   # - bundle exec codeclimate-test-reporter
     #Build Docker image
