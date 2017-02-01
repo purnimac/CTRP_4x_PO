@@ -39,7 +39,8 @@ script:
   # - docker build -t $DOCKER_IMAGE:$DATE -t $DOCKER_IMAGE:latest .
   # - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 after_success:
-  # - pwd
+  - cd ~/
+  - pwd
   # - ls -alth
   # - find ~/.m2/
   # - ls -alth /home/travis/build/CBIIT/CTRP_4x_PO/
