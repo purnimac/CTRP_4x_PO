@@ -30,9 +30,9 @@ RUN unzip /opt/jboss-eap-6.2.0.zip
 RUN ls /opt/jboss*
 
 
-
-# Switch back to jboss user
+# Switch to jboss user
 USER jboss
+
 # Set the JAVA_HOME variable to make it clear where Java is located
 ENV JAVA_HOME /usr/lib/jvm/java
 ENV EAP_HOME /opt/jboss
@@ -43,6 +43,9 @@ ENV JBOSS_HOME /opt/jboss
 #Run which java
 #Run java -version
 RUN ls $JBOSS_HOME
+
+# Switch to root
+USER root
 
 ADD /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear/po.ear $JBOSS_HOME/standalone/deployments/
 #ADD ~/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear/po.ear $JBOSS_HOME/standalone/deployments/
