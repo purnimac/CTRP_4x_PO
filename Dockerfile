@@ -35,8 +35,8 @@ USER jboss
 
 # Set the JAVA_HOME variable to make it clear where Java is located
 ENV JAVA_HOME /usr/lib/jvm/java
-ENV EAP_HOME /opt/jboss
-ENV JBOSS_HOME /opt/jboss
+ENV EAP_HOME /opt/jboss/jboss-eap-6.2
+ENV JBOSS_HOME /opt/jboss/jboss-eap-6.2
 
 #RUN which jboss
 #Run jboss -version
@@ -47,6 +47,10 @@ RUN ls $JBOSS_HOME
 # Switch to root
 USER root
 
+
+RUN ls -alth /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear
+RUN ls -alth /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear/po.ear
+ADD /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear/po.ear /tmp
 ADD /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear/po.ear $JBOSS_HOME/standalone/deployments/
 #ADD ~/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear/po.ear $JBOSS_HOME/standalone/deployments/
 #ADD ~/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/common/resources/jboss-conf/standalone.xml $JBOSS_HOME/standalone/configuration/
