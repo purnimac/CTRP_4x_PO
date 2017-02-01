@@ -42,7 +42,9 @@ ENV JBOSS_HOME /opt/jboss
 #Run which java
 #Run java -version
 
-ADD /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear/po.ear $JBOSS_HOME/standalone/deployments/
-ADD /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/common/resources/jboss-conf/standalone.xml $JBOSS_HOME/standalone/configuration/
+#ADD /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear/po.ear $JBOSS_HOME/standalone/deployments/
+ADD ~/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear/po.ear $JBOSS_HOME/standalone/deployments/
+ADD ~/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/common/resources/jboss-conf/standalone.xml $JBOSS_HOME/standalone/configuration/
+#ADD /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/common/resources/jboss-conf/standalone.xml $JBOSS_HOME/standalone/configuration/
 
 CMD $JBOSS_HOME/bin/standalone.sh
