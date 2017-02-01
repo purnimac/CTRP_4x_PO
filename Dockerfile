@@ -37,9 +37,12 @@ ENV JAVA_HOME /usr/lib/jvm/java
 ENV EAP_HOME /opt/jboss
 ENV JBOSS_HOME /opt/jboss
 
-RUN which jboss
-Run jboss -version
-Run which java
-Run java -version
+#RUN which jboss
+#Run jboss -version
+#Run which java
+#Run java -version
 
-ADD /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear/po.ear $JBOSS_HOME/standalone/deployments
+ADD /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear/po.ear $JBOSS_HOME/standalone/deployments/
+ADD /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/common/resources/jboss-conf/standalone.xml $JBOSS_HOME/standalone/configuration/
+
+CMD $JBOSS_HOME/bin/standalone.sh
