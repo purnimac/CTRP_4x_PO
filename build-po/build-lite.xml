@@ -152,8 +152,14 @@
 	
 	
 	<target name="install" depends="dist,install-jboss"></target>
-	
-	<target name="install-jboss">
+  <target name="get-artifacts" depends="dist">
+	<!--copy todir="${po-ear.dist.dir}" file="${jboss.eap.jdbc.module}" overwrite="true" failonerror="true" verbose="true"/-->
+	<copy tofile="${po-ear.dist.dir}/standalone.xml" file="server-config/standalone.xml.po"
+		  overwrite="true" failonerror="true" verbose="true" />
+  </target>
+
+
+  <target name="install-jboss">
 		  <delete dir="${project.installation.path}" failonerror="true"/>
 		  <mkdir dir="${project.installation.path}"/>
 		  <unzip dest="${project.installation.path}" src="${jboss.eap.file}"/>
