@@ -26,9 +26,7 @@ RUN yum -y install java-1.7.0-openjdk-devel && yum clean all
 ADD https://s3.amazonaws.com/ctrp-repos/Installs/jboss-eap-6.2.0.zip /opt/
 #ADD https://s3.amazonaws.com/ctrp-repos-inttest/Installs/jboss-eap-6.2.0.zip /opt/
 RUN unzip /opt/jboss-eap-6.2.0.zip
-
-RUN ls /opt/jboss*
-
+#RUN ls /opt/jboss*
 
 # Switch to jboss user
 USER jboss
@@ -47,13 +45,11 @@ RUN ls $JBOSS_HOME
 # Switch to root
 USER root
 
+COPY /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear/po.ear /tmp
+COPY /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear/po.ear $JBOSS_HOME/standalone/deployments/
+COPY /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/common/resources/jboss-conf/standalone.xml $JBOSS_HOME/standalone/configuration/
 
-RUN ls -alth /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear
-RUN ls -alth /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear/po.ear
-ADD /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear/po.ear /tmp
-ADD /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear/po.ear $JBOSS_HOME/standalone/deployments/
-#ADD ~/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear/po.ear $JBOSS_HOME/standalone/deployments/
-#ADD ~/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/common/resources/jboss-conf/standalone.xml $JBOSS_HOME/standalone/configuration/
-ADD /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/common/resources/jboss-conf/standalone.xml $JBOSS_HOME/standalone/configuration/
+RUN ls -alth $JBOSS_HOME/standalone/configuration/
+RUN ls -alth $JBOSS_HOME/bin
 
 CMD $JBOSS_HOME/bin/standalone.sh
