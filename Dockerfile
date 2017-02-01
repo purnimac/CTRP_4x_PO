@@ -55,10 +55,10 @@ RUN ls -alth $JBOSS_HOME/bin/standalone*
 
 
 ADD https://s3.amazonaws.com/ctrp-repos/Installs/jboss-postgres-jdbc-module.zip /tmp
-#RUN unzip /tmp/jboss-postgres-jdbc-module.zip
-RUN unzip /tmp/jboss-postgres-jdbc-module.zip $JBOSS_HOME/modules/
+RUN unzip /tmp/jboss-postgres-jdbc-module.zip
 RUN ls -alt /tmp/
 RUN ls -alt $JBOSS_HOME/modules/
-#RUN mv /tmp/jboss-postgres-jdbc-module/ $JBOSS_HOME/modules/
+RUN mv /tmp/opt/ $JBOSS_HOME/modules/
+RUN ls -alt $JBOSS_HOME/modules/
 
 CMD $JBOSS_HOME/bin/standalone.sh
