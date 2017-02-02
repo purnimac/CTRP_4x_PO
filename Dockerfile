@@ -47,7 +47,9 @@ USER root
 
 #COPY /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear/po.ear /tmp
 #COPY /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear/po.ear $JBOSS_HOME/standalone/deployments/
+COPY target/po/dist/exploded/po-ear/po.ear $JBOSS_HOME/standalone/deployments/
 #COPY /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/common/resources/jboss-conf/standalone.xml $JBOSS_HOME/standalone/configuration/
+COPY target/po/dist/exploded/common/resources/jboss-conf/standalone.xml $JBOSS_HOME/standalone/configuration/
 
 RUN ls -alth $JBOSS_HOME/standalone/configuration/
 RUN ls -alth $JBOSS_HOME/standalone/deployments/
@@ -61,5 +63,6 @@ RUN unzip /tmp/jboss-postgres-jdbc-module.zip
 #RUN find / -name postgresql-9.2-1004.jdbc3.jar
 RUN mv /opt/jboss/org $JBOSS_HOME/modules/
 RUN ls -alt $JBOSS_HOME/modules/
+RUN ls -alt $JBOSS_HOME/modules/org/
 
 CMD $JBOSS_HOME/bin/standalone.sh
