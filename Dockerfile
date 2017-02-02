@@ -58,6 +58,7 @@ ADD https://s3.amazonaws.com/ctrp-repos/Installs/jboss-postgres-jdbc-module.zip 
 RUN unzip /tmp/jboss-postgres-jdbc-module.zip
 RUN ls -alt /tmp/
 RUN ls -alt $JBOSS_HOME/modules/
+RUN find / -name postgresql-9.2-1004.jdbc3.jar
 RUN mv /tmp/org/ $JBOSS_HOME/modules/
 RUN ls -alt $JBOSS_HOME/modules/
 
