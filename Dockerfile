@@ -56,7 +56,8 @@ COPY ctrp.production.properties $JBOSS_HOME/ctrp/ctrp.production.properties
 RUN ls -alth $JBOSS_HOME/ctrp/
 
 #USER jboss
-
+ENV DBSERVERHOST=ctrp.clb9vkosemwm.us-east-1.rds.amazonaws.com
+ENV DBSERVERPORT=5432
 RUN ls -alth $JBOSS_HOME/bin/standalone*
 CMD $JBOSS_HOME/bin/standalone.sh
 
