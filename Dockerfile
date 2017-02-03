@@ -23,11 +23,9 @@ RUN yum -y install java-1.7.0-openjdk-devel && yum clean all
 #RUN  yum groupinstall jboss-eap6 -y && yum clean all
 #ADD jboss-eap-6.2.0.zip /opt/
 ADD https://s3.amazonaws.com/ctrp-repos/Installs/jboss-eap-6.2.0.zip /opt/
+RUN ln -s /opt/jboss /opt/jboss-eap-6.2
 #ADD https://s3.amazonaws.com/ctrp-repos-inttest/Installs/jboss-eap-6.2.0.zip /opt/
 RUN unzip /opt/jboss-eap-6.2.0.zip
-
-# Switch to jboss user
-#USER jboss
 
 # Set the JAVA_HOME variable to make it clear where Java is located
 ENV JAVA_HOME /usr/lib/jvm/java
@@ -35,19 +33,28 @@ ENV EAP_HOME /opt/jboss/jboss-eap-6.2
 ENV JBOSS_HOME /opt/jboss/jboss-eap-6.2
 RUN ls $JBOSS_HOME
 
-# Switch to root
-#USER root
+# Add postgres module
+ADD https://s3.amazonaws.com/ctrp-repos/Installs/jboss-postgres-jdbc-module.zip /tmp
+RUN unzip /tmp/jboss-postgres-jdbc-module.zip
+RUN mv /opt/jboss/org $JBOSS_HOME/modules/
+RUN find $JBOSS_HOME/modules/ -type d
 
+############### Box Build ABOVE ################
+############### Code/Build output BELOW ########
+
+# Add ear and standalone.xml from build
 ADD target/po/dist/exploded/po-ear/po.ear $JBOSS_HOME/standalone/deployments/
 RUN ls -alth $JBOSS_HOME/standalone/deployments/
 COPY target/po/dist/exploded/common/resources/jboss-conf/standalone.xml $JBOSS_HOME/standalone/configuration/
 RUN ls -alth $JBOSS_HOME/standalone/configuration/
 
-ADD https://s3.amazonaws.com/ctrp-repos/Installs/jboss-postgres-jdbc-module.zip /tmp
-RUN unzip /tmp/jboss-postgres-jdbc-module.zip
-RUN mv /opt/jboss/org $JBOSS_HOME/modules/
-RUN ls -alt $JBOSS_HOME/modules/
-RUN ls -alt $JBOSS_HOME/modules/org/
+# ADD Environment specific properties files
+COPY ctrp.inttest.properties    $JBOSS_HOME/ctrp/ctrp.inttest.properties
+COPY ctrp.uat.properties        $JBOSS_HOME/ctrp/ctrp.uat.properties
+COPY ctrp.production.properties $JBOSS_HOME/ctrp/ctrp.production.properties
+RUN ls -alth $JBOSS_HOME/ctrp/
+
+USER jboss
 
 RUN ls -alth $JBOSS_HOME/bin/standalone*
 CMD $JBOSS_HOME/bin/standalone.sh

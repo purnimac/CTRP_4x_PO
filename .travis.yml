@@ -39,14 +39,9 @@ script:
   # - docker build -t $DOCKER_IMAGE:$DATE -t $DOCKER_IMAGE:latest .
   # - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 after_success:
-  - cd ~/
-  - pwd
-  # - ls -alth
   # - find ~/.m2/
   # - ls -alth /home/travis/build/CBIIT/CTRP_4x_PO/
   - find /home/travis/build/CBIIT/CTRP_4x_PO/target/
-  - ls -alth /home/travis/build/CBIIT/CTRP_4x_PO/target/po/dist/exploded/po-ear
-
   # - bundle exec codeclimate-test-reporter
     #Build Docker image
   - cd /home/travis/build/CBIIT/CTRP_4x_PO/
