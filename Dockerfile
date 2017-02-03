@@ -58,3 +58,4 @@ USER jboss
 
 RUN ls -alth $JBOSS_HOME/bin/standalone*
 #CMD $JBOSS_HOME/bin/standalone.sh
+
