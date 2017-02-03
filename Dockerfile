@@ -23,9 +23,9 @@ RUN yum -y install java-1.7.0-openjdk-devel && yum clean all
 #RUN  yum groupinstall jboss-eap6 -y && yum clean all
 #ADD jboss-eap-6.2.0.zip /opt/
 ADD https://s3.amazonaws.com/ctrp-repos/Installs/jboss-eap-6.2.0.zip /opt/
-RUN ln -s /opt/jboss /opt/jboss-eap-6.2
 #ADD https://s3.amazonaws.com/ctrp-repos-inttest/Installs/jboss-eap-6.2.0.zip /opt/
 RUN unzip /opt/jboss-eap-6.2.0.zip
+RUN ln -s /opt/jboss /opt/jboss-eap-6.2
 
 # Set the JAVA_HOME variable to make it clear where Java is located
 ENV JAVA_HOME /usr/lib/jvm/java
