@@ -46,6 +46,7 @@ RUN find $JBOSS_HOME/modules/ -type d
 ADD target/po/dist/exploded/po-ear/po.ear $JBOSS_HOME/standalone/deployments/
 RUN ls -alth $JBOSS_HOME/standalone/deployments/
 COPY target/po/dist/exploded/common/resources/jboss-conf/standalone.xml $JBOSS_HOME/standalone/configuration/
+RUN cat $JBOSS_HOME/standalone/configuration/standalone.xml
 RUN ls -alth $JBOSS_HOME/standalone/configuration/
 
 # ADD Environment specific properties files
