@@ -54,7 +54,7 @@ COPY ctrp.uat.properties        $JBOSS_HOME/ctrp/ctrp.uat.properties
 COPY ctrp.production.properties $JBOSS_HOME/ctrp/ctrp.production.properties
 RUN ls -alth $JBOSS_HOME/ctrp/
 
-USER jboss
+#USER jboss
 
 RUN ls -alth $JBOSS_HOME/bin/standalone*
 CMD $JBOSS_HOME/bin/standalone.sh
