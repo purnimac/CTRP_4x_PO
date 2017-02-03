@@ -34,7 +34,7 @@ script:
   - cd /home/travis/build/CBIIT/CTRP_4x_PO/build-po
   # - mvn -Dhttps.protocols=TLSv1.1,TLSv1.2 package -e
   #- mvn -Dhttps.protocols=TLSv1.1,TLSv1.2 clean install -e
-  - ant -f build-lite.xml dist
+  - ant -f build-lite.xml get-artifacts
   #Build Docker image
   # - docker build -t $DOCKER_IMAGE:$DATE -t $DOCKER_IMAGE:latest .
   # - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
